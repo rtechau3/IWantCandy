@@ -1,0 +1,26 @@
+path {
+    stroke: gray;
+    stroke-width: 0.5px;
+    fill: black;
+}
+
+.graticule {
+    fill: none;
+    stroke: #ccc;
+    stroke-width: .5px;
+}
+
+.foreground {
+    fill: none;
+    stroke: #333;
+    stroke-width: 1.5px;
+}
+
+path:hover {
+    fill: red;
+}
+
+#map {
+    width: 960px;
+    height: 500px;
+}
