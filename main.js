@@ -6,7 +6,10 @@
 
 // Other code
 // https://www.toptal.com/javascript/a-map-to-perfection-using-d3-js-to-make-beautiful-web-maps
+// https://bl.ocks.org/almccon/410b4eb5cad61402c354afba67a878b8
 // https://bost.ocks.org/mike/leaflet/
+
+/**can i cut this */
 // var map = new L.Map("map", {center: [37.8, -96.9], zoom: 4})
 //     .addLayer(new L.TileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"));
 
@@ -45,6 +48,7 @@ https://www.toptal.com/javascript/a-map-to-perfection-using-d3-js-to-make-beauti
 /*
 * https://medium.com/@amy.degenaro/introduction-to-digital-cartography-geojson-and-d3-js-c27f066aa84
 */
+/**cut above */
 
 const svg = d3.select("svg")
 const myProjection = d3.geoNaturalEarth1() // initialize new projection
