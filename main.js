@@ -9,71 +9,51 @@
 // https://bl.ocks.org/almccon/410b4eb5cad61402c354afba67a878b8
 // https://bost.ocks.org/mike/leaflet/
 
-/**can i cut this */
-// var map = new L.Map("map", {center: [37.8, -96.9], zoom: 4})
-//     .addLayer(new L.TileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"));
+var width = 960;
+var height= 600;
 
-// var svg = d3.select(map.getPanes().overlayPane).append("svg"),
-//     g = svg.append("g").attr("class", "leaflet-zoom-hide");
+const svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
 
-/*
-Sources
-https://www.toptal.com/javascript/a-map-to-perfection-using-d3-js-to-make-beautiful-web-maps
-*/
+// add radio buttons
+svg.append("g")
+  .append("button")
+  .attr("text","click me!");
 
-// var width = 900;
-// var height = 700;
-
-// var projection = d3.geoMercator();
-
-// var svg = d3.select("body")
-//     .append("svg")
-//     .attr("width", width)
-//     .attr("height", height);
-
-// var path = d3.geoPath()
-//     .projection(projection);
-
-// var g = svg.append("g");
-
-// d3.json("world-110m2.json", function(err, topology) {
-//     g.selectAll("path")
-//         .data(topojson.feature(topology, topology.objects.countries).features)
-//         .enter()
-//         .append("path")
-//         .attr("class", function(d) { return "countries " + d.id; })
-//         .attr("d", path)
-// });
-
-/*
-* https://medium.com/@amy.degenaro/introduction-to-digital-cartography-geojson-and-d3-js-c27f066aa84
-*/
-/**cut above */
-
-const svg = d3.select("svg")
-const myProjection = d3.geoNaturalEarth1() // initialize new projection
+const myProjection = d3.geoAlbersUsa() // initialize new projection
 const path = d3.geoPath().projection(myProjection) // initialize a new geoPath with chosen projection
-const graticule = d3.geoGraticule() // display lattitude/longitude
-
-function drawMap(err, world) {
+function drawMap(err, us) {
     if (err) throw err
-    svg.append("path")
-      .datum(graticule)
-      .attr("class", "graticule")
-      .attr("d", path);
-    svg.append("path")
-      .datum(graticule.outline)
-      .attr("class", "foreground")
-      .attr("d", path);
     svg.append("g")
+      .attr("id", "states") // flag
       .selectAll("path")
-      .data(topojson.feature(world, world.objects.countries).features)
-      .enter().append("path")
-      .attr("d", path);
+      .data(topojson.feature(us, us.objects.states).features)// change to .data(json.features)?
+      .enter() // flag
+      .append("g") // flag
+      .attr("class", "state-path")
+      .attr("state", d => {
+        return d.state;
+      });
+
+      svg.selectAll(".state-path") // flag whole section
+        .append("path")
+        .attr("d", path)
+        .style("fill", "red")
+        .style("stroke-width", "1.5")
+        .style("stroke", "white")
+        .on("click", stateClicked);
+      
+      
 }
+d3.json("Assets/us.json", drawMap)
 
-d3.json("https://unpkg.com/world-atlas@1.1.4/world/110m.json", drawMap);
+function stateClicked(d) {
+  d3.select(this)
+    .style("class", "clicked");
 
+  console.log(d);
+}
 
 var ALdata; //Alabama AL
 var AKdata; //Arkansas AK

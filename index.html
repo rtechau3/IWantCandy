@@ -9,7 +9,7 @@
   <script src="https://d3js.org/d3.v4.min.js"></script>
   <script src="https://d3js.org/topojson.v2.min.js"></script>
   <script src="https://d3js.org/d3-geo.v1.min.js"></script>
-  <!-- <script src="main.js"></script> -->
+  <script src="main.js"></script>
   <style>
     path {
       fill: lightgray;
@@ -33,54 +33,7 @@
     <svg id="region_svg" width="760" height="600" style="border: 1px solid #777;">
     </svg>
 </div> -->
-<script>
-  var width = 960;
-  var height= 600;
 
-  const svg = d3.select("body").append("svg")
-      .attr("width", width)
-      .attr("height", height);
-
-  // add radio buttons
-  svg.append("g")
-    .append("button")
-    .attr("text","click me!");
-
-  const myProjection = d3.geoAlbersUsa() // initialize new projection
-  const path = d3.geoPath().projection(myProjection) // initialize a new geoPath with chosen projection
-  function drawMap(err, us) {
-      if (err) throw err
-      svg.append("g")
-        .attr("id", "states") // flag
-        .selectAll("path")
-        .data(topojson.feature(us, us.objects.states).features)// change to .data(json.features)?
-        .enter() // flag
-        .append("g") // flag
-        .attr("class", "state-path")
-        .attr("state", d => {
-          return d.state;
-        });
-
-        svg.selectAll(".state-path") // flag whole section
-          .append("path")
-          .attr("d", path)
-          .style("fill", "red")
-          .style("stroke-width", "1.5")
-          .style("stroke", "white")
-          .on("click", stateClicked);
-        
-        
-  }
-  d3.json("Assets/us.json", drawMap)
-
-  function stateClicked(d) {
-    d3.select(this)
-      .style("class", "clicked");
-
-    console.log(d);
-  }
-
-</script>
 </body>
 
 </html>
