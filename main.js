@@ -414,74 +414,74 @@ d3.csv("./candy-state.csv", function(data){
 
   
   for (var k = 2; k < 49; k++) {
-    ALdata[k] = new Array(3).fill(0);
-    AKdata[k] = new Array(3).fill(0);
-    AZdata[k] = new Array(3).fill(0);
-    ARdata[k] = new Array(3).fill(0);
-    CAdata[k] = new Array(3).fill(0);
-    COdata[k] = new Array(3).fill(0);
-    CTdata[k] = new Array(3).fill(0);
-    DEdata[k] = new Array(3).fill(0);
-    DCdata[k] = new Array(3).fill(0);
-    FLdata[k] = new Array(3).fill(0);
-    GAdata[k] = new Array(3).fill(0);
-    HIdata[k] = new Array(3).fill(0);
-    IDdata[k] = new Array(3).fill(0);
-    ILdata[k] = new Array(3).fill(0);
-    INdata[k] = new Array(3).fill(0);
-    IAdata[k] = new Array(3).fill(0);
-    KSdata[k] = new Array(3).fill(0);
-    KYdata[k] = new Array(3).fill(0);
-    LAdata[k] = new Array(3).fill(0);
-    MEdata[k] = new Array(3).fill(0);
-    MDdata[k] = new Array(3).fill(0);
-    MAdata[k] = new Array(3).fill(0);
-    MIdata[k] = new Array(3).fill(0);
-    MNdata[k] = new Array(3).fill(0);
-    MSdata[k] = new Array(3).fill(0);
-    MOdata[k] = new Array(3).fill(0);
-    MTdata[k] = new Array(3).fill(0);
-    NEdata[k] = new Array(3).fill(0);
-    NVdata[k] = new Array(3).fill(0);
-    NHdata[k] = new Array(3).fill(0);
-    NJdata[k] = new Array(3).fill(0);
-    NMdata[k] = new Array(3).fill(0);
-    NYdata[k] = new Array(3).fill(0);
-    NCdata[k] = new Array(3).fill(0);
-    NDdata[k] = new Array(3).fill(0);
-    OHdata[k] = new Array(3).fill(0);
-    OKdata[k] = new Array(3).fill(0);
-    ORdata[k] = new Array(3).fill(0);
-    PAdata[k] = new Array(3).fill(0);
-    RIdata[k] = new Array(3).fill(0);
-    SCdata[k] = new Array(3).fill(0);
-    SDdata[k] = new Array(3).fill(0);
-    TNdata[k] = new Array(3).fill(0);
-    TXdata[k] = new Array(3).fill(0);
-    UTdata[k] = new Array(3).fill(0);
-    VTdata[k] = new Array(3).fill(0);
-    VAdata[k] = new Array(3).fill(0);
-    WAdata[k] = new Array(3).fill(0);
-    WVdata[k] = new Array(3).fill(0);
-    WIdata[k] = new Array(3).fill(0);
-    WYdata[k] = new Array(3).fill(0);
+    ALdata[k] = new Array(4).fill(0);
+    AKdata[k] = new Array(4).fill(0);
+    AZdata[k] = new Array(4).fill(0);
+    ARdata[k] = new Array(4).fill(0);
+    CAdata[k] = new Array(4).fill(0);
+    COdata[k] = new Array(4).fill(0);
+    CTdata[k] = new Array(4).fill(0);
+    DEdata[k] = new Array(4).fill(0);
+    DCdata[k] = new Array(4).fill(0);
+    FLdata[k] = new Array(4).fill(0);
+    GAdata[k] = new Array(4).fill(0);
+    HIdata[k] = new Array(4).fill(0);
+    IDdata[k] = new Array(4).fill(0);
+    ILdata[k] = new Array(4).fill(0);
+    INdata[k] = new Array(4).fill(0);
+    IAdata[k] = new Array(4).fill(0);
+    KSdata[k] = new Array(4).fill(0);
+    KYdata[k] = new Array(4).fill(0);
+    LAdata[k] = new Array(4).fill(0);
+    MEdata[k] = new Array(4).fill(0);
+    MDdata[k] = new Array(4).fill(0);
+    MAdata[k] = new Array(4).fill(0);
+    MIdata[k] = new Array(4).fill(0);
+    MNdata[k] = new Array(4).fill(0);
+    MSdata[k] = new Array(4).fill(0);
+    MOdata[k] = new Array(4).fill(0);
+    MTdata[k] = new Array(4).fill(0);
+    NEdata[k] = new Array(4).fill(0);
+    NVdata[k] = new Array(4).fill(0);
+    NHdata[k] = new Array(4).fill(0);
+    NJdata[k] = new Array(4).fill(0);
+    NMdata[k] = new Array(4).fill(0);
+    NYdata[k] = new Array(4).fill(0);
+    NCdata[k] = new Array(4).fill(0);
+    NDdata[k] = new Array(4).fill(0);
+    OHdata[k] = new Array(4).fill(0);
+    OKdata[k] = new Array(4).fill(0);
+    ORdata[k] = new Array(4).fill(0);
+    PAdata[k] = new Array(4).fill(0);
+    RIdata[k] = new Array(4).fill(0);
+    SCdata[k] = new Array(4).fill(0);
+    SDdata[k] = new Array(4).fill(0);
+    TNdata[k] = new Array(4).fill(0);
+    TXdata[k] = new Array(4).fill(0);
+    UTdata[k] = new Array(4).fill(0);
+    VTdata[k] = new Array(4).fill(0);
+    VAdata[k] = new Array(4).fill(0);
+    WAdata[k] = new Array(4).fill(0);
+    WVdata[k] = new Array(4).fill(0);
+    WIdata[k] = new Array(4).fill(0);
+    WYdata[k] = new Array(4).fill(0);
 
     //canada
 
-    BCdata[k] = new Array(3).fill(0);
-    ABdata[k] = new Array(3).fill(0);
-    SKdata[k] = new Array(3).fill(0);
-    MBdata[k] = new Array(3).fill(0);
-    ONdata[k] = new Array(3).fill(0);
-    QCdata[k] = new Array(3).fill(0);
-    NBdata[k] = new Array(3).fill(0);
-    NSdata[k] = new Array(3).fill(0);
-    PEdata[k] = new Array(3).fill(0);
-    NFdata[k] = new Array(3).fill(0);
-    NTdata[k] = new Array(3).fill(0);
-    YTdata[k] = new Array(3).fill(0);
+    BCdata[k] = new Array(4).fill(0);
+    ABdata[k] = new Array(4).fill(0);
+    SKdata[k] = new Array(4).fill(0);
+    MBdata[k] = new Array(4).fill(0);
+    ONdata[k] = new Array(4).fill(0);
+    QCdata[k] = new Array(4).fill(0);
+    NBdata[k] = new Array(4).fill(0);
+    NSdata[k] = new Array(4).fill(0);
+    PEdata[k] = new Array(4).fill(0);
+    NFdata[k] = new Array(4).fill(0);
+    NTdata[k] = new Array(4).fill(0);
+    YTdata[k] = new Array(4).fill(0);
 
-    OTHERdata[k] = new Array(3).fill(0);
+    OTHERdata[k] = new Array(4).fill(0);
 
   }
 
@@ -971,7 +971,7 @@ d3.csv("./candy-state.csv", function(data){
         }
 
         break;
-      case "AK": //TODO: repeat AL code for all states
+      case "AK":
       AKdata[0]++;
 
       if (currOut == "No") {
@@ -28263,7 +28263,79 @@ d3.csv("./candy-state.csv", function(data){
   }
 
 
-console.log(TXdata);
+  
+
+  for (var m = 2; m < ALdata.length; m++) {
+    ALdata[m][3] = (ALdata[m][0] * 1 + ALdata[m][1] * 2 + ALdata[m][2] * 3)/ALdata[0];
+    AKdata[m][3] = (AKdata[m][0] * 1 + AKdata[m][1] * 2 + AKdata[m][2] * 3)/AKdata[0]; //Arkansas AK
+    AZdata[m][3] = (AZdata[m][0] * 1 + AZdata[m][1] * 2 + AZdata[m][2] * 3)/AZdata[0]; //Arizona AZ
+    ARdata[m][3] = (ARdata[m][0] * 1 + ARdata[m][1] * 2 + ARdata[m][2] * 3)/ARdata[0]; //ARKANSAS	AR
+    CAdata[m][3] = (CAdata[m][0] * 1 + CAdata[m][1] * 2 + CAdata[m][2] * 3)/CAdata[0];// CALIFORNIA	CA
+    COdata[m][3] = (COdata[m][0] * 1 + COdata[m][1] * 2 + COdata[m][2] * 3)/COdata[0];// COLORADO	CO
+    CTdata[m][3] = (CTdata[m][0] * 1 + CTdata[m][1] * 2 + CTdata[m][2] * 3)/CTdata[0];// CONNECTICUT	CT
+    DEdata[m][3] = (DEdata[m][0] * 1 + DEdata[m][1] * 2 + DEdata[m][2] * 3)/DEdata[0];// DELAWARE	DE
+    DCdata[m][3] = (DCdata[m][0] * 1 + DCdata[m][1] * 2 + DCdata[m][2] * 3)/DCdata[0];// DISTRICT OF COLUMBIA	DC
+    FLdata[m][3] = (FLdata[m][0] * 1 + FLdata[m][1] * 2 + FLdata[m][2] * 3)/FLdata[0];// FLORIDA	FL
+    GAdata[m][3] = (GAdata[m][0] * 1 + GAdata[m][1] * 2 + GAdata[m][2] * 3)/GAdata[0];// GEORGIA	GA
+    HIdata[m][3] = (HIdata[m][0] * 1 + HIdata[m][1] * 2 + HIdata[m][2] * 3)/HIdata[0];// HAWAII	HI
+    IDdata[m][3] = (IDdata[m][0] * 1 + IDdata[m][1] * 2 + IDdata[m][2] * 3)/IDdata[0];// IDAHO	ID
+    ILdata[m][3] = (ILdata[m][0] * 1 + ILdata[m][1] * 2 + ILdata[m][2] * 3)/ILdata[0];// ILLINOIS	IL
+    INdata[m][3] = (INdata[m][0] * 1 + INdata[m][1] * 2 + INdata[m][2] * 3)/INdata[0];// INDIANA	IN
+    IAdata[m][3] = (IAdata[m][0] * 1 + IAdata[m][1] * 2 + IAdata[m][2] * 3)/IAdata[0];// IOWA	IA
+    KSdata[m][3] = (KSdata[m][0] * 1 + KSdata[m][1] * 2 + KSdata[m][2] * 3)/KSdata[0];// KANSAS	KS
+    KYdata[m][3] = (KYdata[m][0] * 1 + KYdata[m][1] * 2 + KYdata[m][2] * 3)/KYdata[0];// KENTUCKY	KY
+    LAdata[m][3] = (LAdata[m][0] * 1 + LAdata[m][1] * 2 + LAdata[m][2] * 3)/LAdata[0];// LOUISIANA	LA
+    MEdata[m][3] = (MEdata[m][0] * 1 + MEdata[m][1] * 2 + MEdata[m][2] * 3)/MEdata[0];// MAINE	ME
+    MDdata[m][3] = (MDdata[m][0] * 1 + MDdata[m][1] * 2 + MDdata[m][2] * 3)/MDdata[0];// MARYLAND	MD
+    MAdata[m][3] = (MAdata[m][0] * 1 + MAdata[m][1] * 2 + MAdata[m][2] * 3)/MAdata[0];// MASSACHUSETTS	MA
+    MIdata[m][3] = (MIdata[m][0] * 1 + MIdata[m][1] * 2 + MIdata[m][2] * 3)/MIdata[0];// MICHIGAN	MI
+    MNdata[m][3] = (MNdata[m][0] * 1 + MNdata[m][1] * 2 + MNdata[m][2] * 3)/MNdata[0];// MINNESOTA	MN
+    MSdata[m][3] = (MSdata[m][0] * 1 + MSdata[m][1] * 2 + MSdata[m][2] * 3)/MSdata[0];// MISSISSIPPI	MS
+    MOdata[m][3] = (MOdata[m][0] * 1 + MOdata[m][1] * 2 + MOdata[m][2] * 3)/MOdata[0];// MISSOURI	MO
+    MTdata[m][3] = (MTdata[m][0] * 1 + MTdata[m][1] * 2 + MTdata[m][2] * 3)/MTdata[0];// MONTANA	MT
+    NEdata[m][3] = (NEdata[m][0] * 1 + NEdata[m][1] * 2 + NEdata[m][2] * 3)/NEdata[0];// NEBRASKA	NE
+    NVdata[m][3] = (NVdata[m][0] * 1 + NVdata[m][1] * 2 + NVdata[m][2] * 3)/NVdata[0];// NEVADA	NV
+    NHdata[m][3] = (NHdata[m][0] * 1 + NHdata[m][1] * 2 + NHdata[m][2] * 3)/NHdata[0];// NEW HAMPSHIRE	NH
+    NJdata[m][3] = (NJdata[m][0] * 1 + NJdata[m][1] * 2 + NJdata[m][2] * 3)/NJdata[0];// NEW JERSEY	NJ
+    NMdata[m][3] = (NMdata[m][0] * 1 + NMdata[m][1] * 2 + NMdata[m][2] * 3)/NMdata[0];// NEW MEXICO	NM
+    NYdata[m][3] = (NYdata[m][0] * 1 + NYdata[m][1] * 2 + NYdata[m][2] * 3)/NYdata[0];// NEW YORK	NY
+    NCdata[m][3] = (NCdata[m][0] * 1 + NCdata[m][1] * 2 + NCdata[m][2] * 3)/NCdata[0];// NORTH CAROLINA	NC
+    NDdata[m][3] = (NDdata[m][0] * 1 + NDdata[m][1] * 2 + NDdata[m][2] * 3)/NDdata[0];// NORTH DAKOTA	ND
+    OHdata[m][3] = (OHdata[m][0] * 1 + OHdata[m][1] * 2 + OHdata[m][2] * 3)/OHdata[0];// OHIO	OH
+    OKdata[m][3] = (OKdata[m][0] * 1 + OKdata[m][1] * 2 + OKdata[m][2] * 3)/OKdata[0];// OKLAHOMA	OK
+    ORdata[m][3] = (ORdata[m][0] * 1 + ORdata[m][1] * 2 + ORdata[m][2] * 3)/ORdata[0];// OREGON	OR
+    PAdata[m][3] = (PAdata[m][0] * 1 + PAdata[m][1] * 2 + PAdata[m][2] * 3)/PAdata[0];// PENNSYLVANIA	PA
+    RIdata[m][3] = (RIdata[m][0] * 1 + RIdata[m][1] * 2 + RIdata[m][2] * 3)/RIdata[0];// RHODE ISLAND	RI
+    SCdata[m][3] = (SCdata[m][0] * 1 + SCdata[m][1] * 2 + SCdata[m][2] * 3)/SCdata[0];// SOUTH CAROLINA	SC
+    SDdata[m][3] = (SDdata[m][0] * 1 + SDdata[m][1] * 2 + SDdata[m][2] * 3)/SDdata[0];// SOUTH DAKOTA	SD
+    TNdata[m][3] = (TNdata[m][0] * 1 + TNdata[m][1] * 2 + TNdata[m][2] * 3)/TNdata[0];// TENNESSEE	TN
+    TXdata[m][3] = (TXdata[m][0] * 1 + TXdata[m][1] * 2 + TXdata[m][2] * 3)/TXdata[0];// TEXAS	TX
+    UTdata[m][3] = (UTdata[m][0] * 1 + UTdata[m][1] * 2 + UTdata[m][2] * 3)/UTdata[0];// UTAH	UT
+    VTdata[m][3] = (VTdata[m][0] * 1 + VTdata[m][1] * 2 + VTdata[m][2] * 3)/VTdata[0];// VERMONT	VT
+    VAdata[m][3] = (VAdata[m][0] * 1 + VAdata[m][1] * 2 + VAdata[m][2] * 3)/VAdata[0];// VIRGINIA	VA
+    WAdata[m][3] = (WAdata[m][0] * 1 + WAdata[m][1] * 2 + WAdata[m][2] * 3)/WAdata[0];// WASHINGTON	WA
+    WVdata[m][3] = (WVdata[m][0] * 1 + WVdata[m][1] * 2 + WVdata[m][2] * 3)/WVdata[0];// WEST VIRGINIA	WV
+    WIdata[m][3] = (WIdata[m][0] * 1 + WIdata[m][1] * 2 + WIdata[m][2] * 3)/WIdata[0];// WISCONSIN	WI
+    WYdata[m][3] = (WYdata[m][0] * 1 + WYdata[m][1] * 2 + WYdata[m][2] * 3)/WYdata[0];// WYOMING	WY
+
+    //CANADA
+    BCdata[m][3] = (BCdata[m][0] * 1 + BCdata[m][1] * 2 + BCdata[m][2] * 3)/BCdata[0];// BRITISH COLUMBIA	BC
+    ABdata[m][3] = (ABdata[m][0] * 1 + ABdata[m][1] * 2 + ABdata[m][2] * 3)/ABdata[0];// ALBERTA	AB
+    SKdata[m][3] = (SKdata[m][0] * 1 + SKdata[m][1] * 2 + SKdata[m][2] * 3)/SKdata[0];// SASKATCHEWAN	SK
+    MBdata[m][3] = (MBdata[m][0] * 1 + MBdata[m][1] * 2 + MBdata[m][2] * 3)/MBdata[0];// MANITOBA	MB
+    ONdata[m][3] = (ONdata[m][0] * 1 + ONdata[m][1] * 2 + ONdata[m][2] * 3)/ONdata[0];// ONTARIO	ON
+    QCdata[m][3] = (QCdata[m][0] * 1 + QCdata[m][1] * 2 + QCdata[m][2] * 3)/QCdata[0];// QUEBEC	QC
+    NBdata[m][3] = (NBdata[m][0] * 1 + NBdata[m][1] * 2 + NBdata[m][2] * 3)/NBdata[0];// NEW BRUNSWICK	NB
+    NSdata[m][3] = (NSdata[m][0] * 1 + NSdata[m][1] * 2 + NSdata[m][2] * 3)/NSdata[0];// NOVA SCOTIA	NS
+    PEdata[m][3] = (PEdata[m][0] * 1 + PEdata[m][1] * 2 + PEdata[m][2] * 3)/PEdata[0];// PRINCE EDWARD ISLAND	PE
+    NFdata[m][3] = (NFdata[m][0] * 1 + NFdata[m][1] * 2 + NFdata[m][2] * 3)/NFdata[0];// NEWFOUNDLAND	NF
+    NTdata[m][3] = (NTdata[m][0] * 1 + NTdata[m][1] * 2 + NTdata[m][2] * 3)/NTdata[0];// NORTHWEST TERRITORIES	NT
+    YTdata[m][3] = (YTdata[m][0] * 1 + YTdata[m][1] * 2 + YTdata[m][2] * 3)/YTdata[0];// YUKON	YT
+
+    OTHERdata[m][3] = (OTHERdata[m][0] * 1 + OTHERdata[m][1] * 2 + OTHERdata[m][2] * 3)/OTHERdata[0];
+
+  }
+  console.log(NYdata);
 
 
 
