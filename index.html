@@ -41,17 +41,45 @@
       .attr("width", width)
       .attr("height", height);
 
+  // add radio buttons
+  svg.append("g")
+    .append("button")
+    .attr("text","click me!");
+
   const myProjection = d3.geoAlbersUsa() // initialize new projection
   const path = d3.geoPath().projection(myProjection) // initialize a new geoPath with chosen projection
   function drawMap(err, us) {
       if (err) throw err
       svg.append("g")
+        .attr("id", "states") // flag
         .selectAll("path")
-        .data(topojson.feature(us, us.objects.states).features)
-        .enter().append("path")
-        .attr("d", path);
+        .data(topojson.feature(us, us.objects.states).features)// change to .data(json.features)?
+        .enter() // flag
+        .append("g") // flag
+        .attr("class", "state-path")
+        .attr("state", d => {
+          return d.state;
+        });
+
+        svg.selectAll(".state-path") // flag whole section
+          .append("path")
+          .attr("d", path)
+          .style("fill", "red")
+          .style("stroke-width", "1.5")
+          .style("stroke", "white")
+          .on("click", stateClicked);
+        
+        
   }
   d3.json("Assets/us.json", drawMap)
+
+  function stateClicked(d) {
+    d3.select(this)
+      .style("class", "clicked");
+
+    console.log(d);
+  }
+
 </script>
 </body>
 
