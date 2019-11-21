@@ -1,3 +1,16 @@
-.clicked {
-    fill: white;
+.joy {
+    fill: yellow;
+}
+
+.meh {
+    fill: green;
+}
+
+.despair {
+    fill: blue;
+}
+
+button {
+    background: rgb(255, 112, 219);
+    color: white;
 }

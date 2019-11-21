@@ -1,14 +1,59 @@
-// Data Sources
-// Assets/us.json https://github.com/rveciana/d3-composite-projections/tree/master/test/data (https://raw.githubusercontent.com/rveciana/d3-composite-projections/master/test/data/us.json)
+// store candy names
+var candy = [
+  'Butterfinger',
+  'Candy Corn',
+  'Chiclets',
+  'Dots',
+  'Fuzzy Peaches',
+  'Good N Plenty',
+  'Gummy Bears',
+  'Healthy Fruit',
+  'Heath Bar',
+  'Hershey - Dark',
+  'Hershey - Milk',
+  'Hershey Kisses',
+  'Jolly Ranchers - Bad',
+  'Jolly Ranchers - Good',
+  'Junior Mints',
+  'Kit Kit',
+  'Laffy Taffy',
+  'Lemon Heads',
+  'Licorice - Not Black',
+  'Licorice - Black',
+  'Lollipops',
+  'Mike N Ike',
+  'Milk Duds',
+  'Milky Way',
+  'M&Ms',
+  'M&Ms - Peanut',
+  'Mint Kisses',
+  'Mr. Goodbar',
+  'Nerds',
+  'Nestle Crunch',
+  'Peeps',
+  'Pixy Stix',
+  'Reeses Cups',
+  'Rolos',
+  'Skittles',
+  'Snickers',
+  'Sour Patch Kids',
+  'Starburst',
+  'Swedish Fish',
+  'Tic Tacs',
+  'Three Musketeers',
+  'Tolberone',
+  'Trail Mix',
+  'Twix',
+  'Whatchamacallit',
+  'York Peppermint Patties'
+];
 
-// Code Sources
-// https://medium.com/@amy.degenaro/introduction-to-digital-cartography-geojson-and-d3-js-c27f066aa84
+// set cutoffs
+var joyMax = 3.0;
+var mehMax = 2.3;
+var despairMax = 1.6;
 
-// Other code
-// https://www.toptal.com/javascript/a-map-to-perfection-using-d3-js-to-make-beautiful-web-maps
-// https://bl.ocks.org/almccon/410b4eb5cad61402c354afba67a878b8
-// https://bost.ocks.org/mike/leaflet/
-
+// create svg
 var width = 960;
 var height= 600;
 
@@ -16,17 +61,13 @@ const svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height);
 
-// add radio buttons
-svg.append("g")
-  .append("button")
-  .attr("text","click me!");
-
+// create map
 const myProjection = d3.geoAlbersUsa() // initialize new projection
 const path = d3.geoPath().projection(myProjection) // initialize a new geoPath with chosen projection
 function drawMap(err, us) {
     if (err) throw err
     svg.append("g")
-      .attr("id", "states") // flag
+      .attr("id", "states") // flag (means change from first example. can probably delete soon)
       .selectAll("path")
       .data(topojson.feature(us, us.objects.states).features)// change to .data(json.features)?
       .enter() // flag
@@ -39,20 +80,57 @@ function drawMap(err, us) {
       svg.selectAll(".state-path") // flag whole section
         .append("path")
         .attr("d", path)
-        .style("fill", "red")
+        .style("fill", "steelblue")
         .style("stroke-width", "1.5")
-        .style("stroke", "white")
-        .on("click", stateClicked);
-      
-      
+        .style("stroke", "white");
+        // style here
 }
-d3.json("Assets/us.json", drawMap)
 
-function stateClicked(d) {
-  d3.select(this)
-    .style("class", "clicked");
+d3.json("Assets/us.json", drawMap);
 
-  console.log(d);
+// add radio buttons
+var candyIndex = 1;
+candy.forEach((c, i) => {
+  // console.log(c, i);
+  d3.select("body")
+    .append("button")
+    .text(c)
+    .attr("id", i + 2)
+    .style("margin", "5px")
+    .on('click', function(c, i) {
+      var candyIndex = i + 2;
+      var rating = ALdata[candyIndex][3];
+      console.log(c, candyIndex, rating);
+      if (rating <= despairMax) {
+        console.log("despair");
+      } else if (rating <= mehMax) {
+        console.log("meh");
+      } else {
+        console.log("joy");
+      }
+
+      svg.selectAll(".state-path") // not working to select
+        .attr("fill", "purple");
+        // look at p4 for conditional styling
+        // temp1.classed("unselected", d => { 
+        //   return isSelected(selected, xScale2(d.ACT), yScale2(d.GPA))
+        // });
+    });
+});
+
+// handle button clicks
+function editStates(i, d) {
+  // get rating by candy
+  var candyIndex = 2; // populate dynamically
+  var rating = ALdata[candyIndex][3];
+  console.log(rating);
+  if (rating <= despairMax) {
+    console.log("despair");
+  } else if (rating <= mehMax) {
+    console.log("meh");
+  } else {
+    console.log("joy");
+  }
 }
 
 var ALdata; //Alabama AL
@@ -465,6 +543,7 @@ d3.csv("./candy-state.csv", function(data){
 
   }
 
+  // numbers for each candy
   for(var i = 0; i < data.length; i++) {
     var currSt = data[i].STATE; //0
     var currOut = data[i].OUT; //1
@@ -28315,8 +28394,10 @@ d3.csv("./candy-state.csv", function(data){
     OTHERdata[m][3] = (OTHERdata[m][0] * 1 + OTHERdata[m][1] * 2 + OTHERdata[m][2] * 3)/OTHERdata[0];
 
   }
-  console.log(NYdata);
+  // console.log(NYdata);
 
 
 
 });
+
+// end csv data
