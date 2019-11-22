@@ -125,7 +125,10 @@ const svg = d3.select("body").append("svg")
 const myProjection = d3.geoAlbersUsa() // initialize new projection
 const path = d3.geoPath().projection(myProjection) // initialize a new geoPath with chosen projection
 
-var rating = 2.0; // TODO make dynamic
+var candyIndex = 4; // TODO make dynamic
+// console.log(ALdata);
+// var rating = ALdata[candyIndex][3];
+var rating = 2;
 
 function drawMap(err, us) {
   if (err) {
@@ -156,50 +159,47 @@ function drawMap(err, us) {
 
 d3.json("Assets/states-10m.json", drawMap);
 
+// create an array with the average ratings for each state for a specific candy
+function assembleRatings(candyIndex)  {
+  ratings = [];
+  console.log(candyIndex);
+  ratings[0] = ALdata[candyIndex][3];
+  ratings[1] = AKdata[candyIndex][3];
+  ratings[2] = AZdata[candyIndex][3];
+  ratings[3] = ARdata[candyIndex][3];
+  // console.log(ratings);
+
+  return ratings;
+}
+
 // add radio buttons
 var candyIndex = 1;
-candy.forEach((c, i) => {
-  // console.log(c, i);
+candy.forEach((candyName, index) => {
   d3.select("body")
     .append("button")
-    .text(c)
-    .attr("id", i + 2)
+    .text(candyName)
+    .attr("id", index + 2)
     .style("margin", "5px")
-    .on('click', function(c, i) {
-      var candyIndex = i + 2;
-      var rating = ALdata[candyIndex][3];
-      console.log(c, candyIndex, rating);
-      if (rating <= despairMax) {
-        console.log("despair");
-      } else if (rating <= mehMax) {
-        console.log("meh");
-      } else {
-        console.log("joy");
-      }
-
-      svg.selectAll(".state-path") // not working to select
-        .attr("fill", "purple");
-        // look at p4 for conditional styling
-        // temp1.classed("unselected", d => { 
-        //   return isSelected(selected, xScale2(d.ACT), yScale2(d.GPA))
-        // });
+    .on('click', function() {
+      getRatings(index + 2);
     });
 });
 
-// handle button clicks
-function editStates(i, d) {
-  // get rating by candy
-  var candyIndex = 2; // populate dynamically
-  var rating = ALdata[candyIndex][3];
-  console.log(rating);
-  if (rating <= despairMax) {
-    console.log("despair");
-  } else if (rating <= mehMax) {
-    console.log("meh");
+function getRatings(candyIndex) {
+  console.log(candyIndex);
+  var stateIndex = 3;
+  // var candyIndex = 5;
+  var ratings = assembleRatings(3);
+  if (ratings[stateIndex] <= despairMax) {
+    return despairColor;
+  } else if (ratings[stateIndex] <= mehMax) {
+    return mehColor;
   } else {
-    console.log("joy");
+    return joyColor;
   }
 }
+
+/****************** Getting CSV Data ****************/
 
 var ALdata; //Alabama AL
 var AKdata; //Arkansas AK

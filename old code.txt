@@ -29,3 +29,25 @@
 //       // var idk= svg.selectAll(".state-path"); // .attr("ahhhhhhhhhh");
 //       // console.log("!",idk);
 // }
+
+/******************* 11/22/2019: candy.forEach (for creating radio buttons) *******************/
+    // .on('click', function(c, i) {
+    //   console.log(ALdata);
+    //   var candyIndex = i + 2;
+    //   var rating = ALdata[candyIndex][3];
+    //   console.log(c, candyIndex, rating);
+    //   if (rating <= despairMax) {
+    //     console.log("despair");
+    //   } else if (rating <= mehMax) {
+    //     console.log("meh");
+    //   } else {
+    //     console.log("joy");
+    //   }
+
+    //   svg.selectAll(".state-path") // not working to select
+    //     .attr("fill", "purple");
+    //     // look at p4 for conditional styling
+    //     // temp1.classed("unselected", d => { 
+    //     //   return isSelected(selected, xScale2(d.ACT), yScale2(d.GPA))
+    //     // });
+    // });
