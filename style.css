@@ -14,3 +14,8 @@ button {
     background: rgb(255, 112, 219);
     color: white;
 }
+
+.key-img {
+    width: 220px;
+    height: 80px;
+}

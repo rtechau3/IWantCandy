@@ -15,6 +15,9 @@ Candy indices go from 2-end in order that they exist in the CSV
 
 Data Sources
 Assets/us.json https://github.com/rveciana/d3-composite-projections/tree/master/test/data (https://raw.githubusercontent.com/rveciana/d3-composite-projections/master/test/data/us.json)
+-- For more composite projections: https://geoexamples.com/d3-composite-projections/
+Assets/states-albers-10m.json https://cdn.jsdelivr.net/npm/us-atlas@3/states-albers-10m.json
+Assets/states-10m.json https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json
 
 Code Sources
 https://medium.com/@amy.degenaro/introduction-to-digital-cartography-geojson-and-d3-js-c27f066aa84

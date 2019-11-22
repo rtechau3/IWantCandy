@@ -48,10 +48,70 @@ var candy = [
   'York Peppermint Patties'
 ];
 
+var stateNames = [
+  'Alabama',
+  'Alaska',
+  'Arizona',
+  'Arkansas',
+  'California',
+  'Colorado',
+  'Connecticut',
+  'Delaware',
+  'Florida',
+  'Georgia',
+  'Hawaii',
+  'Idaho',
+  'Illinois',
+  'Indiana',
+  'Iowa',
+  'Kansas',
+  'Kentucky',
+  'Louisiana',
+  'Maine',
+  'Maryland',
+  'Massachusetts',
+  'Michigan',
+  'Minnesota',
+  'Mississippi',
+  'Missouri',
+  'Montana',
+  'Nebraska',
+  'Nevada',
+  'New Hampshire',
+  'New Jersey',
+  'New Mexico',
+  'New York',
+  'North Carolina',
+  'North Dakota',
+  'Ohio',
+  'Oklahoma',
+  'Oregon',
+  'Pennsylvania',
+  'Rhode Island',
+  'South Carolina',
+  'South Dakota',
+  'Tennessee',
+  'Texas',
+  'Utah',
+  'Vermont',
+  'Virginia',
+  'Washington',
+  'West Virginia',
+  'Wisconsin',
+  'Wyoming',
+  'extra1',
+  'extra2',
+  'extra3'
+];
+
 // set cutoffs
 var joyMax = 3.0;
 var mehMax = 2.3;
 var despairMax = 1.6;
+
+var joyColor = "yellow";
+var mehColor = "green";
+var despairColor = "blue";
 
 // create svg
 var width = 960;
@@ -64,29 +124,37 @@ const svg = d3.select("body").append("svg")
 // create map
 const myProjection = d3.geoAlbersUsa() // initialize new projection
 const path = d3.geoPath().projection(myProjection) // initialize a new geoPath with chosen projection
-function drawMap(err, us) {
-    if (err) throw err
-    svg.append("g")
-      .attr("id", "states") // flag (means change from first example. can probably delete soon)
-      .selectAll("path")
-      .data(topojson.feature(us, us.objects.states).features)// change to .data(json.features)?
-      .enter() // flag
-      .append("g") // flag
-      .attr("class", "state-path")
-      .attr("state", d => {
-        return d.state;
-      });
 
-      svg.selectAll(".state-path") // flag whole section
-        .append("path")
-        .attr("d", path)
-        .style("fill", "steelblue")
-        .style("stroke-width", "1.5")
-        .style("stroke", "white");
-        // style here
+var rating = 2.0; // TODO make dynamic
+
+function drawMap(err, us) {
+  if (err) {
+    throw err;
+  }
+
+  var geojson = topojson.feature(us, us.objects.states);
+
+  svg.selectAll("path")
+    .data(geojson.features)
+    .enter()
+    .append("path")
+    .attr("d", path)
+    .attr("state-name", d => {
+      return d.properties.name;
+    })
+    .style("fill", function() {
+      if (rating <= despairMax) {
+        return despairColor;
+      } else if (rating <= mehMax) {
+        return mehColor;
+      } else {
+        return joyColor;
+      }
+    });
+
 }
 
-d3.json("Assets/us.json", drawMap);
+d3.json("Assets/states-10m.json", drawMap);
 
 // add radio buttons
 var candyIndex = 1;

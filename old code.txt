@@ -1,0 +1,31 @@
+/******* 11/22/2019: drawing the map from https://medium.com/@amy.degenaro/introduction-to-digital-cartography-geojson-and-d3-js-c27f066aa84; https://us-svg.herokuapp.com/ ****************/
+// var stateNameCount = 0;
+// function drawMap(err, us) {
+//     if (err) throw err
+//     svg.append("g")
+//       .attr("id", "states") // flag (means change from first example. can probably delete soon)
+//       .selectAll("path")
+//       .data(topojson.feature(us, us.objects.states).features)// change to .data(json.features)?
+//       .enter() // flag
+//       .append("g") // flag
+//       .attr("class", "state-path")
+//       .attr("state", d => {
+//         console.log(d.state);
+//         return d.state;
+//       })
+      
+
+//       svg.selectAll(".state-path") // flag whole section
+//         .append("path")
+//         .attr("d", path)
+//         // .attr("state-name", stateNames[stateNameCount])
+//         .style("fill", "steelblue")
+//         .style("stroke-width", "1.5")
+//         .style("stroke", "white")
+//         .text("stuff");
+//         // style here
+//         // stateNameCount++;
+
+//       // var idk= svg.selectAll(".state-path"); // .attr("ahhhhhhhhhh");
+//       // console.log("!",idk);
+// }
