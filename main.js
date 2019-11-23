@@ -1,4 +1,4 @@
-// store candy names
+// store candy names to create the buttons
 var candy = [
   'Butterfinger',
   'Candy Corn',
@@ -48,70 +48,32 @@ var candy = [
   'York Peppermint Patties'
 ];
 
-var stateNames = [
-  'Alabama',
-  'Alaska',
-  'Arizona',
-  'Arkansas',
-  'California',
-  'Colorado',
-  'Connecticut',
-  'Delaware',
-  'Florida',
-  'Georgia',
-  'Hawaii',
-  'Idaho',
-  'Illinois',
-  'Indiana',
-  'Iowa',
-  'Kansas',
-  'Kentucky',
-  'Louisiana',
-  'Maine',
-  'Maryland',
-  'Massachusetts',
-  'Michigan',
-  'Minnesota',
-  'Mississippi',
-  'Missouri',
-  'Montana',
-  'Nebraska',
-  'Nevada',
-  'New Hampshire',
-  'New Jersey',
-  'New Mexico',
-  'New York',
-  'North Carolina',
-  'North Dakota',
-  'Ohio',
-  'Oklahoma',
-  'Oregon',
-  'Pennsylvania',
-  'Rhode Island',
-  'South Carolina',
-  'South Dakota',
-  'Tennessee',
-  'Texas',
-  'Utah',
-  'Vermont',
-  'Virginia',
-  'Washington',
-  'West Virginia',
-  'Wisconsin',
-  'Wyoming',
-  'extra1',
-  'extra2',
-  'extra3'
-];
-
 // set cutoffs
 var joyMax = 3.0;
 var mehMax = 2.3;
 var despairMax = 1.6;
 
-var joyColor = "yellow";
-var mehColor = "green";
-var despairColor = "blue";
+// define colors for each average rating (update to match the key)
+var joyColor = "#FFE699";
+var mehColor = "C5E0B4";
+var despairColor = "B4C7E7";
+
+// use to store the average ratings to color the states
+var averageRatings = [];
+// use to loop through averageRatings in drawMap. There might be a better way to do this
+var count = 0;
+
+// initial coloring before button pressed
+function initialColoring() { // can probably do with new Array(56).fill(0)
+  for (r = 0; r < 56; r++) { // has to be 56 (see geojson: an array of 56 Features)
+    if (r%2 === 0) {
+      averageRatings[r] = 0;
+    } else {
+      averageRatings[r] = 2.1;
+    }
+  }
+}
+initialColoring();
 
 // create svg
 var width = 960;
@@ -125,27 +87,27 @@ const svg = d3.select("body").append("svg")
 const myProjection = d3.geoAlbersUsa() // initialize new projection
 const path = d3.geoPath().projection(myProjection) // initialize a new geoPath with chosen projection
 
-var candyIndex = 4; // TODO make dynamic
-// console.log(ALdata);
-// var rating = ALdata[candyIndex][3];
-var rating = 2;
-
 function drawMap(err, us) {
   if (err) {
     throw err;
   }
 
+  console.log(averageRatings);
+
+  // get the features, which are the states (coordinates plus state names)
   var geojson = topojson.feature(us, us.objects.states);
 
+  // draw the states
   svg.selectAll("path")
     .data(geojson.features)
     .enter()
     .append("path")
-    .attr("d", path)
+    .attr("d", path) // d refers to one feature object
     .attr("state-name", d => {
       return d.properties.name;
     })
-    .style("fill", function() {
+    .style("fill", function() { // right now, does for an arbitray array
+      rating = averageRatings[count++];
       if (rating <= despairMax) {
         return despairColor;
       } else if (rating <= mehMax) {
@@ -159,21 +121,7 @@ function drawMap(err, us) {
 
 d3.json("Assets/states-10m.json", drawMap);
 
-// create an array with the average ratings for each state for a specific candy
-function assembleRatings(candyIndex)  {
-  ratings = [];
-  console.log(candyIndex);
-  ratings[0] = ALdata[candyIndex][3];
-  ratings[1] = AKdata[candyIndex][3];
-  ratings[2] = AZdata[candyIndex][3];
-  ratings[3] = ARdata[candyIndex][3];
-  // console.log(ratings);
-
-  return ratings;
-}
-
-// add radio buttons
-var candyIndex = 1;
+// add buttons
 candy.forEach((candyName, index) => {
   d3.select("body")
     .append("button")
@@ -181,22 +129,72 @@ candy.forEach((candyName, index) => {
     .attr("id", index + 2)
     .style("margin", "5px")
     .on('click', function() {
-      getRatings(index + 2);
+      recolorMap(index + 2); // is this right? add two bc candy starts at index 2 in each STATEdata
     });
 });
 
-function getRatings(candyIndex) {
-  console.log(candyIndex);
-  var stateIndex = 3;
-  // var candyIndex = 5;
-  var ratings = assembleRatings(3);
-  if (ratings[stateIndex] <= despairMax) {
-    return despairColor;
-  } else if (ratings[stateIndex] <= mehMax) {
-    return mehColor;
-  } else {
-    return joyColor;
-  }
+function recolorMap(candyIndex) {
+  assembleRatings(candyIndex);
+  d3.json("Assets/states-10m.json", drawMap);  
+}
+
+// create an array with the average ratings for each state for a specific candy
+function assembleRatings(candyIndex)  { // I have NOT proofread this to make sure it is correct
+  ratings = [];
+  console.log("candyIndex in assembleRatings:", candyIndex);
+  ratings[0] = ALdata[candyIndex][3];
+  ratings[1] = AKdata[candyIndex][3];
+  ratings[2] = AZdata[candyIndex][3];
+  ratings[3] = ARdata[candyIndex][3];
+  ratings[4] = CAdata[candyIndex][3];
+  ratings[5] = COdata[candyIndex][3];
+  ratings[6] = CTdata[candyIndex][3];
+  ratings[7] = DEdata[candyIndex][3];
+  ratings[8] = DCdata[candyIndex][3];
+  ratings[9] = FLdata[candyIndex][3];
+  ratings[10] = GAdata[candyIndex][3];
+  ratings[11] = HIdata[candyIndex][3];
+  ratings[12] = IDdata[candyIndex][3];
+  ratings[13] = ILdata[candyIndex][3];
+  ratings[14] = INdata[candyIndex][3];
+  ratings[15] = IAdata[candyIndex][3];
+  ratings[16] = KSdata[candyIndex][3];
+  ratings[17] = KYdata[candyIndex][3];
+  ratings[18] = LAdata[candyIndex][3];
+  ratings[19] = MEdata[candyIndex][3];
+  ratings[20] = MDdata[candyIndex][3];
+  ratings[21] = MAdata[candyIndex][3];
+  ratings[22] = MNdata[candyIndex][3];
+  ratings[23] = MSdata[candyIndex][3];
+  ratings[24] = MOdata[candyIndex][3];
+  ratings[25] = MTdata[candyIndex][3];
+  ratings[26] = NEdata[candyIndex][3];
+  ratings[27] = NVdata[candyIndex][3];
+  ratings[28] = NHdata[candyIndex][3];
+  ratings[29] = NJdata[candyIndex][3];
+  ratings[30] = NMdata[candyIndex][3];
+  ratings[31] = NYdata[candyIndex][3];
+  ratings[32] = NCdata[candyIndex][3];
+  ratings[33] = NDdata[candyIndex][3];
+  ratings[34] = OHdata[candyIndex][3];
+  ratings[35] = OKdata[candyIndex][3];
+  ratings[36] = ORdata[candyIndex][3];
+  ratings[37] = PAdata[candyIndex][3];
+  ratings[38] = RIdata[candyIndex][3];
+  ratings[39] = SCdata[candyIndex][3];
+  ratings[40] = SDdata[candyIndex][3];
+  ratings[41] = TNdata[candyIndex][3];
+  ratings[42] = TXdata[candyIndex][3];
+  ratings[43] = UTdata[candyIndex][3];
+  ratings[44] = VTdata[candyIndex][3];
+  ratings[45] = VAdata[candyIndex][3];
+  ratings[46] = WAdata[candyIndex][3];
+  ratings[47] = WVdata[candyIndex][3];
+  ratings[48] = WIdata[candyIndex][3];
+  ratings[49] = WYdata[candyIndex][3];
+  // console.log(ratings);
+
+  averageRatings = ratings;
 }
 
 /****************** Getting CSV Data ****************/
