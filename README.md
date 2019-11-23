@@ -48,18 +48,18 @@ Averages can be found at STATEdata[candy index here][3]
 Candy indices go from 2-end in order that they exist in the CSV
 
 Data Sources
-Assets/us.json https://github.com/rveciana/d3-composite-projections/tree/master/test/data (https://raw.githubusercontent.com/rveciana/d3-composite-projections/master/test/data/us.json)
--- For more composite projections: https://geoexamples.com/d3-composite-projections/
-Assets/states-albers-10m.json https://cdn.jsdelivr.net/npm/us-atlas@3/states-albers-10m.json
-Assets/states-10m.json https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json
+- Assets/us.json https://github.com/rveciana/d3-composite-projections/tree/master/test/data (https://raw.githubusercontent.com/rveciana/d3-composite-projections/master/test/data/us.json)
+- - For more composite projections: https://geoexamples.com/d3-composite-projections/
+- Assets/states-albers-10m.json https://cdn.jsdelivr.net/npm/us-atlas@3/states-albers-10m.json
+- Assets/states-10m.json https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json
 
 Code Sources
-// http://bl.ocks.org/michellechandra/0b2ce4923dc9b5809922
-// https://bl.ocks.org/almccon/410b4eb5cad61402c354afba67a878b8
+- http://bl.ocks.org/michellechandra/0b2ce4923dc9b5809922
+- https://bl.ocks.org/almccon/410b4eb5cad61402c354afba67a878b8
 
 Other code
-https://medium.com/@amy.degenaro/introduction-to-digital-cartography-geojson-and-d3-js-c27f066aa84
-https://us-svg.herokuapp.com/
-https://www.toptal.com/javascript/a-map-to-perfection-using-d3-js-to-make-beautiful-web-maps
-https://bl.ocks.org/almccon/410b4eb5cad61402c354afba67a878b8
-https://bost.ocks.org/mike/leaflet/
+- https://medium.com/@amy.degenaro/introduction-to-digital-cartography-geojson-and-d3-js-c27f066aa84
+- https://us-svg.herokuapp.com/
+- https://www.toptal.com/javascript/a-map-to-perfection-using-d3-js-to-make-beautiful-web-maps
+- https://bl.ocks.org/almccon/410b4eb5cad61402c354afba67a878b8
+- https://bost.ocks.org/mike/leaflet/
