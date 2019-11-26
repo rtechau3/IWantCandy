@@ -57,6 +57,7 @@ var despairMax = 1.6;
 var joyColor = "#FFE699";
 var mehColor = "C5E0B4";
 var despairColor = "B4C7E7";
+var grayColor = "808080";
 
 // use to store the average ratings to color the states
 var averageRatings = [];
@@ -66,12 +67,14 @@ var count = 0;
 // initial coloring before button pressed
 function initialColoring() { // can probably do with new Array(56).fill(0)
   for (r = 0; r < 56; r++) { // has to be 56 (see geojson: an array of 56 Features)
-    if (r%2 === 0) {
-      averageRatings[r] = 0;
-    } else {
-      averageRatings[r] = 2.1;
-    }
+    // if (r%2 === 0) {
+    //   averageRatings[r] = 0;
+    // } else {
+    //   averageRatings[r] = 2.1;
+    // }
+    averageRatings[r] = -1;
   }
+  // averageRatings.fill(-1);
 }
 initialColoring();
 
@@ -97,26 +100,33 @@ function drawMap(err, us) {
   // get the features, which are the states (coordinates plus state names)
   var geojson = topojson.feature(us, us.objects.states);
 
+  count = 0;
   // draw the states
-  svg.selectAll("path")
+  svg.selectAll(".path")
     .data(geojson.features)
     .enter()
     .append("path")
     .attr("d", path) // d refers to one feature object
     .attr("state-name", d => {
       return d.properties.name;
+      // console.log("hello?");
     })
     .style("fill", function() { // right now, does for an arbitray array
+      // console.log("inside fill count: " + count);
       rating = averageRatings[count++];
-      if (rating <= despairMax) {
+      if (rating < 0) {
+        return grayColor;
+      } else if (rating <= despairMax) {
         return despairColor;
       } else if (rating <= mehMax) {
         return mehColor;
       } else {
         return joyColor;
       }
+
     });
 
+    console.log(count);
 }
 
 d3.json("Assets/states-10m.json", drawMap);
