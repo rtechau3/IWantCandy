@@ -98,7 +98,7 @@ function drawMap(err, us) {
   var geojson = topojson.feature(us, us.objects.states);
 
   // draw the states
-  svg.selectAll("path")
+  svg.selectAll(".path")
     .data(geojson.features)
     .enter()
     .append("path")
@@ -116,6 +116,7 @@ function drawMap(err, us) {
         return joyColor;
       }
     });
+    count = 0;
 
 }
 
