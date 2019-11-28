@@ -19,3 +19,7 @@ button {
     width: 250px;
     height: 80px;
 }
+
+.details {
+    font-weight: bold;
+}

@@ -47,7 +47,9 @@ var candy = [
   'Whatchamacallit',
   'York Peppermint Patties'
 ];
-
+function click() {
+  console.log(ALdata);
+}
 // set cutoffs
 var joyMax = 3.0;
 var mehMax = 2.3;
@@ -59,24 +61,30 @@ var mehColor = "C5E0B4";
 var despairColor = "B4C7E7";
 var grayColor = "808080";
 
-// use to store the average ratings to color the states
-var averageRatings = [];
-// use to loop through averageRatings in drawMap. There might be a better way to do this
-var count = 0;
+// create dropdown
+var dropdown = d3.select("body")
+  .append('p')
+  .append('select')
+    .attr('class', 'select')
+    // .attr('id', (d, i) => {return i;})
+    .on('change', function() {
+      var thisCandy = d3.select('.select').property('value');
+      // var optionIndex = d3.select('.select').property('id');
+      // console.log(thisCandy);
+      // console.log(optionIndex);
+      // console.log(d3.select('.option').property('id'));
+      d3.select("#candy_name").text(thisCandy);
+      // recolorMap(i + 2); // pass in candyName
+    });
 
-// initial coloring before button pressed
-function initialColoring() { // can probably do with new Array(56).fill(0)
-  for (r = 0; r < 56; r++) { // has to be 56 (see geojson: an array of 56 Features)
-    // if (r%2 === 0) {
-    //   averageRatings[r] = 0;
-    // } else {
-    //   averageRatings[r] = 2.1;
-    // }
-    averageRatings[r] = -1;
-  }
-  // averageRatings.fill(-1);
-}
-initialColoring();
+// add options to dropdown
+dropdown.selectAll('option')
+  .data(candy)
+  .enter()
+  .append('option')
+    .text(d => {return d;})
+    .attr('value', d => {return d;})
+    .attr('id', (d,i) => {return i;})
 
 // create svg
 var width = 960;
@@ -85,6 +93,20 @@ var height= 600;
 const svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height);
+
+
+// use to store the average ratings to color the states
+var averageRatings = [];
+// use to loop through averageRatings in drawMap. There might be a better way to do this
+var count = 0;
+
+// initial coloring before button pressed
+function initialColoring() { // can probably do with new Array(56).fill(0)
+  for (r = 0; r < 56; r++) { // has to be 56 (see geojson: an array of 56 Features)
+    averageRatings[r] = -1;
+  }
+}
+initialColoring();
 
 // create map
 const myProjection = d3.geoAlbersUsa() // initialize new projection
@@ -111,8 +133,7 @@ function drawMap(err, us) {
       return d.properties.name;
       // console.log("hello?");
     })
-    .style("fill", function() { // right now, does for an arbitray array
-      // console.log("inside fill count: " + count);
+    .style("fill", function() {
       rating = averageRatings[count++];
       if (rating < 0) {
         return grayColor;
@@ -124,8 +145,13 @@ function drawMap(err, us) {
         return joyColor;
       }
 
+    })
+    .on("click", d => {
+      d3.select("#state_name").text(d.properties.name);
+      d3.select("#average_rating").text(rating);
+      // d3.select("#num_people").text(stateData[count][0]);
+      d3.select("#percent_out").text("ayyeeee");
     });
-    count = 0;
 
     console.log(count);
 }
@@ -133,19 +159,20 @@ function drawMap(err, us) {
 d3.json("Assets/states-10m.json", drawMap);
 
 // add buttons
-candy.forEach((candyName, index) => {
-  d3.select("body")
-    .append("button")
-    .text(candyName)
-    .attr("id", index + 2)
-    .style("margin", "5px")
-    .on('click', function() {
-      recolorMap(index + 2); // is this right? add two bc candy starts at index 2 in each STATEdata
-    });
-});
+// candy.forEach((candyName, index) => {
+//   d3.select("body")
+//     .append("button")
+//     .text(candyName)
+//     .attr("id", index + 2)
+//     .style("margin", "5px")
+//     .on('click', function() {
+//       d3.select("#candy_name").text(candyName);
+//       recolorMap(index + 2); // is this right? add two bc candy starts at index 2 in each STATEdata
+//     });
+// });
 
-function recolorMap(candyIndex) {
-  assembleRatings(candyIndex);
+function recolorMap(candyIndex) { // change to candyName
+  assembleRatings(candyIndex); // find candyIndex with a switch statement and the candy array?
   d3.json("Assets/states-10m.json", drawMap);  
 }
 
@@ -153,57 +180,58 @@ function recolorMap(candyIndex) {
 function assembleRatings(candyIndex)  { // I have NOT proofread this to make sure it is correct
   ratings = [];
   console.log("candyIndex in assembleRatings:", candyIndex);
-  ratings[0] = ALdata[candyIndex][3];
-  ratings[1] = AKdata[candyIndex][3];
-  ratings[2] = AZdata[candyIndex][3];
-  ratings[3] = ARdata[candyIndex][3];
-  ratings[4] = CAdata[candyIndex][3];
-  ratings[5] = COdata[candyIndex][3];
-  ratings[6] = CTdata[candyIndex][3];
-  ratings[7] = DEdata[candyIndex][3];
-  ratings[8] = DCdata[candyIndex][3];
-  ratings[9] = FLdata[candyIndex][3];
-  ratings[10] = GAdata[candyIndex][3];
-  ratings[11] = HIdata[candyIndex][3];
-  ratings[12] = IDdata[candyIndex][3];
-  ratings[13] = ILdata[candyIndex][3];
-  ratings[14] = INdata[candyIndex][3];
-  ratings[15] = IAdata[candyIndex][3];
-  ratings[16] = KSdata[candyIndex][3];
-  ratings[17] = KYdata[candyIndex][3];
-  ratings[18] = LAdata[candyIndex][3];
-  ratings[19] = MEdata[candyIndex][3];
-  ratings[20] = MDdata[candyIndex][3];
-  ratings[21] = MAdata[candyIndex][3];
-  ratings[22] = MNdata[candyIndex][3];
-  ratings[23] = MSdata[candyIndex][3];
-  ratings[24] = MOdata[candyIndex][3];
-  ratings[25] = MTdata[candyIndex][3];
-  ratings[26] = NEdata[candyIndex][3];
-  ratings[27] = NVdata[candyIndex][3];
-  ratings[28] = NHdata[candyIndex][3];
-  ratings[29] = NJdata[candyIndex][3];
-  ratings[30] = NMdata[candyIndex][3];
-  ratings[31] = NYdata[candyIndex][3];
-  ratings[32] = NCdata[candyIndex][3];
-  ratings[33] = NDdata[candyIndex][3];
-  ratings[34] = OHdata[candyIndex][3];
-  ratings[35] = OKdata[candyIndex][3];
-  ratings[36] = ORdata[candyIndex][3];
-  ratings[37] = PAdata[candyIndex][3];
-  ratings[38] = RIdata[candyIndex][3];
-  ratings[39] = SCdata[candyIndex][3];
-  ratings[40] = SDdata[candyIndex][3];
-  ratings[41] = TNdata[candyIndex][3];
-  ratings[42] = TXdata[candyIndex][3];
-  ratings[43] = UTdata[candyIndex][3];
-  ratings[44] = VTdata[candyIndex][3];
-  ratings[45] = VAdata[candyIndex][3];
-  ratings[46] = WAdata[candyIndex][3];
-  ratings[47] = WVdata[candyIndex][3];
-  ratings[48] = WIdata[candyIndex][3];
-  ratings[49] = WYdata[candyIndex][3];
-  // console.log(ratings);
+  console.log(stateData);
+  console.log(stateData[0]);
+  ratings[0] = stateData[0][candyIndex][3];
+  ratings[1] = stateData[1][candyIndex][3];
+  ratings[2] = stateData[2][candyIndex][3];
+  ratings[3] = stateData[3][candyIndex][3];
+  ratings[4] = stateData[4][candyIndex][3];
+  ratings[5] = stateData[5][candyIndex][3];
+  ratings[6] = stateData[6][candyIndex][3];
+  ratings[7] = stateData[7][candyIndex][3];
+  ratings[8] = stateData[8][candyIndex][3];
+  ratings[9] = stateData[9][candyIndex][3];
+  ratings[10] = stateData[10][candyIndex][3];
+  ratings[11] = stateData[11][candyIndex][3];
+  ratings[12] = stateData[12][candyIndex][3];
+  ratings[13] = stateData[13][candyIndex][3];
+  ratings[14] = stateData[14][candyIndex][3];
+  ratings[15] = stateData[15][candyIndex][3];
+  ratings[16] = stateData[16][candyIndex][3];
+  ratings[17] = stateData[17][candyIndex][3];
+  ratings[18] = stateData[18][candyIndex][3];
+  ratings[19] = stateData[19][candyIndex][3];
+  ratings[20] = stateData[20][candyIndex][3];
+  ratings[21] = stateData[21][candyIndex][3];
+  ratings[22] = stateData[22][candyIndex][3];
+  ratings[23] = stateData[23][candyIndex][3];
+  ratings[24] = stateData[24][candyIndex][3];
+  ratings[25] = stateData[25][candyIndex][3];
+  ratings[26] = stateData[26][candyIndex][3];
+  ratings[27] = stateData[27][candyIndex][3];
+  ratings[28] = stateData[28][candyIndex][3];
+  ratings[29] = stateData[29][candyIndex][3];
+  ratings[30] = stateData[30][candyIndex][3];
+  ratings[31] = stateData[31][candyIndex][3];
+  ratings[32] = stateData[32][candyIndex][3];
+  ratings[33] = stateData[33][candyIndex][3];
+  ratings[34] = stateData[34][candyIndex][3];
+  ratings[35] = stateData[35][candyIndex][3];
+  ratings[36] = stateData[36][candyIndex][3];
+  ratings[37] = stateData[37][candyIndex][3];
+  ratings[38] = stateData[38][candyIndex][3];
+  ratings[39] = stateData[39][candyIndex][3];
+  ratings[40] = stateData[40][candyIndex][3];
+  ratings[41] = stateData[41][candyIndex][3];
+  ratings[42] = stateData[42][candyIndex][3];
+  ratings[43] = stateData[43][candyIndex][3];
+  ratings[44] = stateData[44][candyIndex][3];
+  ratings[45] = stateData[45][candyIndex][3];
+  ratings[46] = stateData[46][candyIndex][3];
+  ratings[47] = stateData[47][candyIndex][3];
+  ratings[48] = stateData[48][candyIndex][3];
+  ratings[49] = stateData[49][candyIndex][3];
 
   averageRatings = ratings;
 }
@@ -277,6 +305,60 @@ var NTdata;// NORTHWEST TERRITORIES	NT
 var YTdata;// YUKON	YT
 
 var OTHERdata;
+
+var stateData = [
+  ALdata,
+  AKdata,
+  AZdata,
+  ARdata,
+  CAdata,
+  COdata,
+  CTdata,
+  DEdata,
+  DCdata,
+  FLdata,
+  GAdata,
+  HIdata,
+  IDdata,
+  ILdata,
+  INdata,
+  IAdata,
+  KSdata,
+  KYdata,
+  LAdata,
+  MEdata,
+  MDdata,
+  MAdata,
+  MIdata,
+  MNdata,
+  MSdata,
+  MOdata,
+  MTdata,
+  NEdata,
+  NVdata,
+  NHdata,
+  NJdata,
+  NMdata,
+  NYdata,
+  NCdata,
+  NDdata,
+  OHdata,
+  OKdata,
+  ORdata,
+  PAdata,
+  RIdata,
+  SCdata,
+  SDdata,
+  TNdata,
+  TXdata,
+  UTdata,
+  VTdata,
+  VAdata,
+  WAdata,
+  WVdata,
+  WIdata,
+  WYdata
+];
 
 d3.csv("./candy-state.csv", function(data){
 
@@ -28472,9 +28554,10 @@ d3.csv("./candy-state.csv", function(data){
 
   }
   // console.log(NYdata);
-
+  console.log("hi");
 
 
 });
 
+console.log("here");
 // end csv data
