@@ -65,17 +65,39 @@ var grayColor = "808080";
 var dropdown = d3.select("body")
   .append('p')
   .append('select')
+  .attr('id', (d, i) => {return i;})
     .attr('class', 'select')
-    // .attr('id', (d, i) => {return i;})
     .on('change', function() {
-      var thisCandy = d3.select('.select').property('value');
-      // var optionIndex = d3.select('.select').property('id');
-      // console.log(thisCandy);
-      // console.log(optionIndex);
-      // console.log(d3.select('.option').property('id'));
+      var thisCandyIndexAsString = d3.select('.select').property('value'); // gets the index in the dropdown
+      var thisCandyIndex = parseInt(thisCandyIndexAsString);
+      console.log(thisCandyIndex);
+      // get the right candy name to display
+      // var thisCandy = getCandyName(thisCandyIndex);
+      var thisCandy;
+      candy.forEach((candyName, index) => {
+        if (index === thisCandyIndex) {
+          console.log(candyName);
+          thisCandy = candyName; // TODO how to break
+        } else {
+          thisCandy = "no candy found";
+        }
+      })
+      console.log(thisCandy);
       d3.select("#candy_name").text(thisCandy);
-      // recolorMap(i + 2); // pass in candyName
+      // recolorMap(thisCandyIndex + 2); // pass in candyName
     });
+
+function getCandyName(candyIndex) {
+  console.log(candyIndex);
+  candy.forEach((candyName, index) => {
+    if (index === candyIndex) {
+      console.log(candyName);
+      return candyName; // TODO how to break
+    } else {
+      return "no candy found";
+    }
+  })
+}
 
 // add options to dropdown
 dropdown.selectAll('option')
@@ -83,8 +105,9 @@ dropdown.selectAll('option')
   .enter()
   .append('option')
     .text(d => {return d;})
-    .attr('value', d => {return d;})
-    .attr('id', (d,i) => {return i;})
+    .attr('value', (d, i) => {return i;})
+    // .attr('value', d => {return d;})
+    // .attr('value2', (d,i) => {return "id" + i;})
 
 // create svg
 var width = 960;
@@ -117,7 +140,7 @@ function drawMap(err, us) {
     throw err;
   }
 
-  console.log(averageRatings);
+  // console.log(averageRatings);
 
   // get the features, which are the states (coordinates plus state names)
   var geojson = topojson.feature(us, us.objects.states);
