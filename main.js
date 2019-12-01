@@ -1,3 +1,4 @@
+/****************** Global Variables ****************/
 // store candy names to create the buttons
 var candy = [
   'Butterfinger',
@@ -47,19 +48,30 @@ var candy = [
   'Whatchamacallit',
   'York Peppermint Patties'
 ];
-function click() {
-  console.log(ALdata);
-}
+
+// hold all the different STATEdata arrays (defined at the end of the d3.csv call)
+var stateData;
+
 // set cutoffs
 var joyMax = 3.0;
 var mehMax = 2.3;
 var despairMax = 1.6;
 
 // define colors for each average rating (update to match the key)
-var joyColor = "#FFE699";
-var mehColor = "C5E0B4";
+var joyColor = "C5E0B4";
+var mehColor = "FFE699";
 var despairColor = "B4C7E7";
 var grayColor = "808080";
+
+// use to store the average ratings to color the states
+var averageRatings = [];
+// use to loop through averageRatings in drawMap. There might be a better way to do this
+var count = 0;
+
+
+
+/****************** Create the Vis ****************/
+
 
 // create dropdown
 var dropdown = d3.select("body")
@@ -70,34 +82,15 @@ var dropdown = d3.select("body")
     .on('change', function() {
       var thisCandyIndexAsString = d3.select('.select').property('value'); // gets the index in the dropdown
       var thisCandyIndex = parseInt(thisCandyIndexAsString);
-      console.log(thisCandyIndex);
+      console.log("dropdown option index:", thisCandyIndex);
       // get the right candy name to display
-      // var thisCandy = getCandyName(thisCandyIndex);
-      var thisCandy;
       candy.forEach((candyName, index) => {
         if (index === thisCandyIndex) {
-          console.log(candyName);
-          thisCandy = candyName; // TODO how to break
-        } else {
-          thisCandy = "no candy found";
+          d3.select("#candy_name").text(candyName);
         }
       })
-      console.log(thisCandy);
-      d3.select("#candy_name").text(thisCandy);
-      // recolorMap(thisCandyIndex + 2); // pass in candyName
+      recolorMap(thisCandyIndex + 2); // pass in index of dropdown option (add 2 because it starts at 0)
     });
-
-function getCandyName(candyIndex) {
-  console.log(candyIndex);
-  candy.forEach((candyName, index) => {
-    if (index === candyIndex) {
-      console.log(candyName);
-      return candyName; // TODO how to break
-    } else {
-      return "no candy found";
-    }
-  })
-}
 
 // add options to dropdown
 dropdown.selectAll('option')
@@ -117,12 +110,6 @@ const svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height);
 
-
-// use to store the average ratings to color the states
-var averageRatings = [];
-// use to loop through averageRatings in drawMap. There might be a better way to do this
-var count = 0;
-
 // initial coloring before button pressed
 function initialColoring() { // can probably do with new Array(56).fill(0)
   for (r = 0; r < 56; r++) { // has to be 56 (see geojson: an array of 56 Features)
@@ -140,12 +127,11 @@ function drawMap(err, us) {
     throw err;
   }
 
-  // console.log(averageRatings);
-
   // get the features, which are the states (coordinates plus state names)
   var geojson = topojson.feature(us, us.objects.states);
 
   count = 0;
+  var rating;
   // draw the states
   svg.selectAll(".path")
     .data(geojson.features)
@@ -156,8 +142,9 @@ function drawMap(err, us) {
       return d.properties.name;
       // console.log("hello?");
     })
-    .style("fill", function() {
+    .style("fill", function(d) {
       rating = averageRatings[count++];
+      console.log(d.properties.name, rating);
       if (rating < 0) {
         return grayColor;
       } else if (rating <= despairMax) {
@@ -169,14 +156,15 @@ function drawMap(err, us) {
       }
 
     })
-    .on("click", d => {
+    .on("click", (d, i) => {
+      console.log(count);
+      console.log(i);
       d3.select("#state_name").text(d.properties.name);
-      d3.select("#average_rating").text(rating);
-      // d3.select("#num_people").text(stateData[count][0]);
-      d3.select("#percent_out").text("ayyeeee");
+      d3.select("#average_rating").text(averageRatings[i]); // TODO - truncate
+      // d3.select("#num_people").text(stateData[count][0]); // TODO
+      d3.select("#percent_out").text("ayyeeee"); // TODO
     });
 
-    console.log(count);
 }
 
 d3.json("Assets/states-10m.json", drawMap);
@@ -194,8 +182,10 @@ d3.json("Assets/states-10m.json", drawMap);
 //     });
 // });
 
-function recolorMap(candyIndex) { // change to candyName
-  assembleRatings(candyIndex); // find candyIndex with a switch statement and the candy array?
+
+// colormap when dropdown option is selected/changed
+function recolorMap(candyIndex) {
+  assembleRatings(candyIndex);
   d3.json("Assets/states-10m.json", drawMap);  
 }
 
@@ -203,8 +193,7 @@ function recolorMap(candyIndex) { // change to candyName
 function assembleRatings(candyIndex)  { // I have NOT proofread this to make sure it is correct
   ratings = [];
   console.log("candyIndex in assembleRatings:", candyIndex);
-  console.log(stateData);
-  console.log(stateData[0]);
+  console.log("stateData:", stateData);
   ratings[0] = stateData[0][candyIndex][3];
   ratings[1] = stateData[1][candyIndex][3];
   ratings[2] = stateData[2][candyIndex][3];
@@ -255,6 +244,12 @@ function assembleRatings(candyIndex)  { // I have NOT proofread this to make sur
   ratings[47] = stateData[47][candyIndex][3];
   ratings[48] = stateData[48][candyIndex][3];
   ratings[49] = stateData[49][candyIndex][3];
+  ratings[50] = stateData[50][candyIndex][3];
+  ratings[51] = stateData[51][candyIndex][3];
+  ratings[52] = stateData[52][candyIndex][3];
+  ratings[53] = stateData[53][candyIndex][3];
+  ratings[54] = stateData[54][candyIndex][3];
+  ratings[55] = stateData[55][candyIndex][3];
 
   averageRatings = ratings;
 }
@@ -328,60 +323,6 @@ var NTdata;// NORTHWEST TERRITORIES	NT
 var YTdata;// YUKON	YT
 
 var OTHERdata;
-
-var stateData = [
-  ALdata,
-  AKdata,
-  AZdata,
-  ARdata,
-  CAdata,
-  COdata,
-  CTdata,
-  DEdata,
-  DCdata,
-  FLdata,
-  GAdata,
-  HIdata,
-  IDdata,
-  ILdata,
-  INdata,
-  IAdata,
-  KSdata,
-  KYdata,
-  LAdata,
-  MEdata,
-  MDdata,
-  MAdata,
-  MIdata,
-  MNdata,
-  MSdata,
-  MOdata,
-  MTdata,
-  NEdata,
-  NVdata,
-  NHdata,
-  NJdata,
-  NMdata,
-  NYdata,
-  NCdata,
-  NDdata,
-  OHdata,
-  OKdata,
-  ORdata,
-  PAdata,
-  RIdata,
-  SCdata,
-  SDdata,
-  TNdata,
-  TXdata,
-  UTdata,
-  VTdata,
-  VAdata,
-  WAdata,
-  WVdata,
-  WIdata,
-  WYdata
-];
 
 d3.csv("./candy-state.csv", function(data){
 
@@ -28577,10 +28518,124 @@ d3.csv("./candy-state.csv", function(data){
 
   }
   // console.log(NYdata);
-  console.log("hi");
 
+
+
+
+
+
+  stateData = [
+    ALdata,
+    AKdata,
+    AZdata,
+    COdata,
+    FLdata,
+    GAdata,
+    INdata,
+    KSdata,
+    MEdata,
+    MAdata,
+    MNdata,
+    NJdata,
+    NCdata,
+    NDdata,
+    OKdata,
+    PAdata,
+    SDdata,
+    TXdata,
+    WYdata,
+    CTdata,
+    MOdata,
+    WVdata,
+    ILdata,
+    NMdata,
+    ARdata,
+    CAdata,
+    DEdata,
+    DCdata,
+    HIdata,
+    IAdata,
+    KYdata,
+    MDdata,
+    MIdata,
+    MSdata,
+    MTdata,
+    NHdata,
+    NYdata,
+    OHdata,
+    ORdata,
+    TNdata,
+    UTdata,
+    VAdata,
+    WAdata,
+    WIdata,
+    OTHERdata, // American Samoa
+    OTHERdata, // Guam
+    OTHERdata, //Commonwealth of the Northern Mariana Islands
+    NEdata,
+    SCdata,
+    OTHERdata, // Puerto Rico
+    OTHERdata, // US Virgin Islands
+    IDdata,
+    NVdata,
+    VTdata,
+    LAdata,
+    RIdata
+  ]
 
 });
 
-console.log("here");
 // end csv data
+// stateData = [
+//   ALdata,
+//   AKdata,
+//   AZdata,
+//   ARdata,
+//   CAdata,
+//   COdata,
+//   CTdata,
+//   DEdata,
+//   DCdata,
+//   FLdata,
+//   GAdata,
+//   HIdata,
+//   IDdata,
+//   ILdata,
+//   INdata,
+//   IAdata,
+//   KSdata,
+//   KYdata,
+//   LAdata,
+//   MEdata,
+//   MDdata,
+//   MAdata,
+//   MIdata,
+//   MNdata,
+//   MSdata,
+//   MOdata,
+//   MTdata,
+//   NEdata,
+//   NVdata,
+//   NHdata,
+//   NJdata,
+//   NMdata,
+//   NYdata,
+//   NCdata,
+//   NDdata,
+//   OHdata,
+//   OKdata,
+//   ORdata,
+//   PAdata,
+//   RIdata,
+//   SCdata,
+//   SDdata,
+//   TNdata,
+//   TXdata,
+//   UTdata,
+//   VTdata,
+//   VAdata,
+//   WAdata,
+//   WVdata,
+//   WIdata,
+//   WYdata
+// ];

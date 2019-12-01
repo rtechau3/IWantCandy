@@ -174,3 +174,61 @@ function getRatings(candyIndex) {
 //     'extra2',
 //     'extra3'
 //   ];
+
+/************* 12/1/2019, just ordering stateData *****/
+// Alabama - ALdata
+// Alaska - AKdata
+// Arizona - AZdata
+// Colorado - COdata
+// Florida - FLdata
+// Georgia - GAdata
+// Indiana - INdata
+// Kansas - KSdata
+// Maine-  MEdata
+// Massachusetts - MAdata
+// Minnesota - MNdata
+// New Jersey - NJdata
+// North Carolina - NCdata
+// North Dakota- NDdata
+// Oklahoma - OKdata
+// Pennsylvania - PAdata
+// South Dakota - SDdata
+// Texas - TXdata
+// Wyoming - WYdata
+// Connecticut - CTdata
+// Missouri - MOdata
+// West Virginia - WVdata
+// Illinois - IL
+// New Mexico - NMdata
+// Arkansas - ARdata
+// California - CAdata
+// Delaware - DE
+// District of Columbia - DCdata
+// Hawaii - HIdata
+// Iowa - IAdata
+Kentucky - KYdata
+Maryland - MDdata
+Michigan - MIdata
+Mississippi - MSdata
+Montana - MTdata
+New Hampshire - NHdata
+New York - NYdata
+Ohio - OHdata
+Oregon - ORdata
+Tennessee - TNdata
+Utah - UTdata
+Virginia - VAdata
+Washington - WAdata
+Wisconsin - WIdata
+American Samoa - ???
+Guam - ???
+Commonwealth of the Northern Mariana Islands - ???
+Nebraska - NEdata
+South Carolina - SCdata
+Puerto Rico - ???
+United States Virgin Islands - ???
+Idaho - IDdata
+Nevada - NVdata
+Vermont - VTdata
+Louisiana - LAdata
+Rhode Island - RIdata
