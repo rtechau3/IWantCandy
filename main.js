@@ -34,6 +34,7 @@ var candy = [
   'Peeps',
   'Pixy Stix',
   'Reeses Cups',
+  'Reeses Pieces',
   'Rolos',
   'Skittles',
   'Snickers',
@@ -143,8 +144,11 @@ function drawMap(err, us) {
       // console.log("hello?");
     })
     .style("fill", function(d) {
-      rating = averageRatings[count++];
-      console.log(d.properties.name, rating);
+      var ratingLong = averageRatings[count++];
+      var ratingRounded = ratingLong.toFixed(2);
+      rating = parseFloat(ratingRounded);
+      // console.log(ratingLong, ratingRounded, rating);
+      // console.log(d.properties.name, rating);
       if (rating < 0) {
         return grayColor;
       } else if (rating <= despairMax) {
@@ -157,10 +161,8 @@ function drawMap(err, us) {
 
     })
     .on("click", (d, i) => {
-      console.log(count);
-      console.log(i);
       d3.select("#state_name").text(d.properties.name);
-      d3.select("#average_rating").text(averageRatings[i]); // TODO - truncate
+      d3.select("#average_rating").text(averageRatings[i].toFixed(2));
       // d3.select("#num_people").text(stateData[count][0]); // TODO
       d3.select("#percent_out").text("ayyeeee"); // TODO
     });

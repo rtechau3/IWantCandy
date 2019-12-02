@@ -23,3 +23,7 @@ button {
 .details {
     font-weight: bold;
 }
+
+.appended-text {
+    font-weight: normal;
+}
