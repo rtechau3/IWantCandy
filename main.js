@@ -1,6 +1,7 @@
 /****************** Global Variables ****************/
 // store candy names to create the buttons
 var candy = [
+  'Select a Candy',
   'Butterfinger',
   'Candy Corn',
   'Chiclets',
@@ -91,13 +92,16 @@ var despairColor100 = "1A65EB";
 
 var grayColor = "808080";
 
+// svg
+var width = 960;
+var height= 600;
 
 
 /****************** Create the Vis ****************/
 
 
 // create dropdown
-var dropdown = d3.select("body")
+var dropdown = d3.select("#details")
   .append('p')
   .append('select')
   .attr('id', (d, i) => {return i;})
@@ -119,7 +123,7 @@ var dropdown = d3.select("body")
           d3.select("#candy_name").text(candyName);
         }
       })
-      recolorMap(thisCandyIndex + 2); // pass in index of dropdown option (add 2 because it starts at 0)
+      recolorMap(thisCandyIndex + 1); // pass in index of dropdown option (add 2 because it starts at 0)
     });
 
 // add options to dropdown
@@ -133,10 +137,7 @@ dropdown.selectAll('option')
     // .attr('value2', (d,i) => {return "id" + i;})
 
 // create svg
-var width = 960;
-var height= 600;
-
-const svg = d3.select("body").append("svg")
+const svg = d3.select("#stuff-map").append("svg")
     .attr("width", width)
     .attr("height", height);
 
@@ -382,6 +383,17 @@ function assembleRatings(candyIndex)  { // I have NOT proofread this to make sur
   averageRatings = ratings;
 
 }
+
+// add key image
+
+// svg.append('svg:image')
+//   .attr({
+//     'href': 'Assets/Key-FINAL-Number-Line.PNG',
+//     x: 0,
+//     y: 0,
+//     width: 350,
+//     height: 140
+//   })
 
 /****************** Getting CSV Data ****************/
 
