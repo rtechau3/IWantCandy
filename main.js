@@ -52,6 +52,13 @@ var candy = [
 
 // hold all the different STATEdata arrays (defined at the end of the d3.csv call)
 var stateData;
+
+// use to store the average ratings to color the states
+var averageRatings = [];
+// use to loop through averageRatings in drawMap. There might be a better way to do this
+var count = 0;
+
+// hold the percentage of respondents that went trick or treating
 var outPercent;
 outPercent = [];
 
@@ -84,11 +91,6 @@ var despairColor100 = "1A65EB";
 
 var grayColor = "808080";
 
-// use to store the average ratings to color the states
-var averageRatings = [];
-// use to loop through averageRatings in drawMap. There might be a better way to do this
-var count = 0;
-
 
 
 /****************** Create the Vis ****************/
@@ -101,6 +103,13 @@ var dropdown = d3.select("body")
   .attr('id', (d, i) => {return i;})
     .attr('class', 'select')
     .on('change', function() {
+      // clear the details on demand
+      d3.select("#state_name").text("");
+      d3.select("#average_rating").text("");
+      d3.select("#num_people").text("");
+      d3.select("#percent_out").text("");
+      
+      // determine which candy was selected
       var thisCandyIndexAsString = d3.select('.select').property('value'); // gets the index in the dropdown
       var thisCandyIndex = parseInt(thisCandyIndexAsString);
       console.log("dropdown option index:", thisCandyIndex);
@@ -135,7 +144,10 @@ const svg = d3.select("body").append("svg")
 function initialColoring() { // can probably do with new Array(56).fill(0)
   for (r = 0; r < 56; r++) { // has to be 56 (see geojson: an array of 56 Features)
     averageRatings[r] = -1;
+    outPercent[r] = -1;
   }
+  console.log(averageRatings);
+  console.log(outPercent);
 }
 initialColoring();
 
@@ -165,11 +177,21 @@ function drawMap(err, us) {
       // console.log("hello?");
     })
     .style("fill", function(d) {
-      var ratingLong = averageRatings[count++];
-      var ratingRounded = ratingLong.toFixed(2);
+      var ratingLong = averageRatings[count];
+      var ratingRounded = ratingLong.toFixed(2); // returns a string
       rating = parseFloat(ratingRounded);
       // console.log(ratingLong, ratingRounded, rating);
-      out = outPercent[count];
+      // out = outPercent[count];
+
+      // get percentage out, and round to two decial places
+      var outLong = outPercent[count];
+      console.log(outLong);
+      var outRounded = outLong.toFixed(2); // returns a string (wont work until dropdown has been selected)
+      out = parseFloat(outRounded);
+
+      // increment count
+      count++;
+
       // rating = averageRatings[count++];
       // console.log("out" + out);
       // console.log(d.properties.name, rating);
@@ -221,26 +243,13 @@ function drawMap(err, us) {
     .on("click", (d, i) => {
       d3.select("#state_name").text(d.properties.name);
       d3.select("#average_rating").text(averageRatings[i].toFixed(2));
-      d3.select("#num_people").text(stateData[i][0]); // TODO
-      d3.select("#percent_out").text(outPercent[i]); // TODO
+      d3.select("#num_people").text(stateData[i][0]);
+      d3.select("#percent_out").text((outPercent[i] * 100).toFixed(0) + "%"); // TODO //((outPercent[i].toFixed(2)) * 100) + "%"
     });
 
 }
 
 d3.json("Assets/states-10m.json", drawMap);
-
-// add buttons
-// candy.forEach((candyName, index) => {
-//   d3.select("body")
-//     .append("button")
-//     .text(candyName)
-//     .attr("id", index + 2)
-//     .style("margin", "5px")
-//     .on('click', function() {
-//       d3.select("#candy_name").text(candyName);
-//       recolorMap(index + 2); // is this right? add two bc candy starts at index 2 in each STATEdata
-//     });
-// });
 
 
 // colormap when dropdown option is selected/changed

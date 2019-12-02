@@ -52,6 +52,20 @@
     //     // });
     // });
 
+    // creating real buttons
+    // add buttons
+// candy.forEach((candyName, index) => {
+//   d3.select("body")
+//     .append("button")
+//     .text(candyName)
+//     .attr("id", index + 2)
+//     .style("margin", "5px")
+//     .on('click', function() {
+//       d3.select("#candy_name").text(candyName);
+//       recolorMap(index + 2); // is this right? add two bc candy starts at index 2 in each STATEdata
+//     });
+// });
+
 /***************** 11/22/2019: to recolor the states **********************/ 
 // I think this can be deleted (it became redundant)
 function getRatings(candyIndex) {
