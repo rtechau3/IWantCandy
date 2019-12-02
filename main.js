@@ -51,6 +51,8 @@ var candy = [
 
 // hold all the different STATEdata arrays (defined at the end of the d3.csv call)
 var stateData;
+var outPercent;
+outPercent = [];
 
 // set cutoffs
 var joyMax = 3.0;
@@ -58,9 +60,27 @@ var mehMax = 2.3;
 var despairMax = 1.6;
 
 // define colors for each average rating (update to match the key)
-var joyColor = "C5E0B4";
-var mehColor = "FFE699";
-var despairColor = "B4C7E7";
+// var joyColor = "C5E0B4";
+var joyColor20 = "C5E0B4";
+var joyColor40 = "B6E09B";
+var joyColor60 = "A3E07B";
+var joyColor80 = "8DE354";
+var joyColor100 = "72E625";
+
+// var mehColor = "FFE699";
+var mehColor20 = "FFE699";
+var mehColor40 = "FCD96F";
+var mehColor60 = "FAD052";
+var mehColor80 = "FAC832";
+var mehColor100 = "FAC014";
+
+// var despairColor = "B4C7E7";
+var despairColor20 = "B4C7E7";
+var despairColor40 = "95B3E8";
+var despairColor60 = "6D9AE8";
+var despairColor80 = "427FEB";
+var despairColor100 = "1A65EB";
+
 var grayColor = "808080";
 
 // use to store the average ratings to color the states
@@ -132,6 +152,7 @@ function drawMap(err, us) {
 
   count = 0;
   var rating;
+  var out;
   // draw the states
   svg.selectAll(".path")
     .data(geojson.features)
@@ -143,26 +164,62 @@ function drawMap(err, us) {
       // console.log("hello?");
     })
     .style("fill", function(d) {
+      out = outPercent[count];
       rating = averageRatings[count++];
-      console.log(d.properties.name, rating);
+      // console.log("out" + out);
+      // console.log(d.properties.name, rating);
       if (rating < 0) {
         return grayColor;
       } else if (rating <= despairMax) {
-        return despairColor;
+        // return despairColor;
+        if (out > 0.8) {
+          return despairColor100;
+        } else if (out > 0.6) {
+          return despairColor80;
+        } else if (out > 0.4){
+          return despairColor60;
+        } else if (out > 0.2) {
+          return despairColor40;
+        } else {
+          return despairColor20;
+        }
       } else if (rating <= mehMax) {
-        return mehColor;
+        // return mehColor;
+        if (out > 0.8) {
+          return mehColor100;
+        } else if (out > 0.6) {
+          return mehColor80;
+        } else if (out > 0.4){
+          return mehColor60;
+        } else if (out > 0.2) {
+          return mehColor40;
+        } else {
+          return mehColor20;
+        }
       } else {
-        return joyColor;
+        // return joyColor;
+        if (out > 0.8) {
+          return joyColor100;
+        } else if (out > 0.6) {
+          return joyColor80;
+        } else if (out > 0.4){
+          return joyColor60;
+        } else if (out > 0.2) {
+          return joyColor40;
+        } else {
+          return joyColor20;
+        }
+
       }
 
     })
     .on("click", (d, i) => {
-      console.log(count);
-      console.log(i);
+      // console.log(count);
+      // console.log(i);
       d3.select("#state_name").text(d.properties.name);
       d3.select("#average_rating").text(averageRatings[i]); // TODO - truncate
-      // d3.select("#num_people").text(stateData[count][0]); // TODO
-      d3.select("#percent_out").text("ayyeeee"); // TODO
+      d3.select("#num_people").text(stateData[i][0]); // TODO
+      d3.select("#percent_out").text(outPercent[i]); // TODO
     });
 
 }
@@ -251,7 +308,67 @@ function assembleRatings(candyIndex)  { // I have NOT proofread this to make sur
   ratings[54] = stateData[54][candyIndex][3];
   ratings[55] = stateData[55][candyIndex][3];
 
+  outPercent[0] = stateData[0][1][1]/stateData[0][0];
+  outPercent[1] = stateData[1][1][1]/stateData[1][0];
+  outPercent[2] = stateData[2][1][1]/stateData[2][0];
+  outPercent[3] = stateData[3][1][1]/stateData[3][0];
+  outPercent[4] = stateData[4][1][1]/stateData[4][0];
+  outPercent[5] = stateData[5][1][1]/stateData[5][0];
+  outPercent[6] = stateData[6][1][1]/stateData[6][0];
+  outPercent[7] = stateData[7][1][1]/stateData[7][0];
+  outPercent[8] = stateData[8][1][1]/stateData[8][0];
+  outPercent[9] = stateData[9][1][1]/stateData[9][0];
+  outPercent[10] = stateData[10][1][1]/stateData[10][0];
+  outPercent[11] = stateData[11][1][1]/stateData[11][0];
+  outPercent[12] = stateData[12][1][1]/stateData[12][0];
+  outPercent[13] = stateData[13][1][1]/stateData[13][0];
+  outPercent[14] = stateData[14][1][1]/stateData[14][0];
+  outPercent[15] = stateData[15][1][1]/stateData[15][0];
+  outPercent[16] = stateData[16][1][1]/stateData[16][0];
+  outPercent[17] = stateData[17][1][1]/stateData[17][0];
+  outPercent[18] = stateData[18][1][1]/stateData[18][0];
+  outPercent[19] = stateData[19][1][1]/stateData[19][0];
+  outPercent[20] = stateData[20][1][1]/stateData[20][0];
+  outPercent[21] = stateData[21][1][1]/stateData[21][0];
+  outPercent[22] = stateData[22][1][1]/stateData[22][0];
+  outPercent[23] = stateData[23][1][1]/stateData[23][0];
+  outPercent[24] = stateData[24][1][1]/stateData[24][0];
+  outPercent[25] = stateData[25][1][1]/stateData[25][0];
+  outPercent[26] = stateData[26][1][1]/stateData[26][0];
+  outPercent[27] = stateData[27][1][1]/stateData[27][0];
+  outPercent[28] = stateData[28][1][1]/stateData[28][0];
+  outPercent[29] = stateData[29][1][1]/stateData[29][0];
+  outPercent[30] = stateData[30][1][1]/stateData[30][0];
+  outPercent[31] = stateData[31][1][1]/stateData[31][0];
+  outPercent[32] = stateData[32][1][1]/stateData[32][0];
+  outPercent[33] = stateData[33][1][1]/stateData[33][0];
+  outPercent[34] = stateData[34][1][1]/stateData[34][0];
+  outPercent[35] = stateData[35][1][1]/stateData[35][0];
+  outPercent[36] = stateData[36][1][1]/stateData[36][0];
+  outPercent[37] = stateData[37][1][1]/stateData[37][0];
+  outPercent[38] = stateData[38][1][1]/stateData[38][0];
+  outPercent[39] = stateData[39][1][1]/stateData[39][0];
+  outPercent[40] = stateData[40][1][1]/stateData[40][0];
+  outPercent[41] = stateData[41][1][1]/stateData[41][0];
+  outPercent[42] = stateData[42][1][1]/stateData[42][0];
+  outPercent[43] = stateData[43][1][1]/stateData[43][0];
+  outPercent[44] = stateData[44][1][1]/stateData[44][0];
+  outPercent[45] = stateData[45][1][1]/stateData[45][0];
+  outPercent[46] = stateData[46][1][1]/stateData[46][0];
+  outPercent[47] = stateData[47][1][1]/stateData[47][0];
+  outPercent[48] = stateData[48][1][1]/stateData[48][0];
+  outPercent[49] = stateData[49][1][1]/stateData[49][0];
+  outPercent[50] = stateData[50][1][1]/stateData[50][0];
+  outPercent[51] = stateData[51][1][1]/stateData[51][0];
+  outPercent[52] = stateData[52][1][1]/stateData[52][0];
+  outPercent[53] = stateData[53][1][1]/stateData[53][0];
+  outPercent[54] = stateData[54][1][1]/stateData[54][0];
+  outPercent[55] = stateData[55][1][1]/stateData[55][0];
+
+  // console.log("test state data: " + outPercent);
+
   averageRatings = ratings;
+
 }
 
 /****************** Getting CSV Data ****************/
@@ -335,260 +452,260 @@ d3.csv("./candy-state.csv", function(data){
   //Initialize variables for all states
   ALdata = new Array(49);
   ALdata[0] = 0;
-  ALdata[1] = new Array(2).fill(0);
+  ALdata[1] = new Array(3).fill(0);
 
   AKdata = new Array(49);
   AKdata[0] = 0;
-  AKdata[1] = new Array(2).fill(0);
+  AKdata[1] = new Array(3).fill(0);
 
   AZdata = new Array(49);
   AZdata[0] = 0;
-  AZdata[1] = new Array(2).fill(0);
+  AZdata[1] = new Array(3).fill(0);
 
   ARdata = new Array(49);
   ARdata[0] = 0;
-  ARdata[1] = new Array(2).fill(0);
+  ARdata[1] = new Array(3).fill(0);
 
   CAdata = new Array(49);
   CAdata[0] = 0;
-  CAdata[1] = new Array(2).fill(0);
+  CAdata[1] = new Array(3).fill(0);
 
   COdata = new Array(49);
   COdata[0] = 0;
-  COdata[1] = new Array(2).fill(0);
+  COdata[1] = new Array(3).fill(0);
 
   CTdata = new Array(49);
   CTdata[0] = 0;
-  CTdata[1] = new Array(2).fill(0);
+  CTdata[1] = new Array(3).fill(0);
 
   DEdata = new Array(49);
   DEdata[0] = 0;
-  DEdata[1] = new Array(2).fill(0);
+  DEdata[1] = new Array(3).fill(0);
 
   DCdata = new Array(49);
   DCdata[0] = 0;
-  DCdata[1] = new Array(2).fill(0);
+  DCdata[1] = new Array(3).fill(0);
 
   FLdata = new Array(49);
   FLdata[0] = 0;
-  FLdata[1] = new Array(2).fill(0);
+  FLdata[1] = new Array(3).fill(0);
 
   GAdata = new Array(49);
   GAdata[0] = 0;
-  GAdata[1] = new Array(2).fill(0);
+  GAdata[1] = new Array(3).fill(0);
 
   HIdata = new Array(49);
   HIdata[0] = 0;
-  HIdata[1] = new Array(2).fill(0);
+  HIdata[1] = new Array(3).fill(0);
 
   IDdata = new Array(49);
   IDdata[0] = 0;
-  IDdata[1] = new Array(2).fill(0);
+  IDdata[1] = new Array(3).fill(0);
 
   ILdata = new Array(49);
   ILdata[0] = 0;
-  ILdata[1] = new Array(2).fill(0);
+  ILdata[1] = new Array(3).fill(0);
 
   INdata = new Array(49);
   INdata[0] = 0;
-  INdata[1] = new Array(2).fill(0);
+  INdata[1] = new Array(3).fill(0);
 
   IAdata = new Array(49);
   IAdata[0] = 0;
-  IAdata[1] = new Array(2).fill(0);
+  IAdata[1] = new Array(3).fill(0);
 
   KSdata = new Array(49);
   KSdata[0] = 0;
-  KSdata[1] = new Array(2).fill(0);
+  KSdata[1] = new Array(3).fill(0);
 
   KYdata = new Array(49);
   KYdata[0] = 0;
-  KYdata[1] = new Array(2).fill(0);
+  KYdata[1] = new Array(3).fill(0);
 
   LAdata = new Array(49);
   LAdata[0] = 0;
-  LAdata[1] = new Array(2).fill(0);
+  LAdata[1] = new Array(3).fill(0);
 
   MEdata = new Array(49);
   MEdata[0] = 0;
-  MEdata[1] = new Array(2).fill(0);
+  MEdata[1] = new Array(3).fill(0);
 
   MDdata = new Array(49);
   MDdata[0] = 0;
-  MDdata[1] = new Array(2).fill(0);
+  MDdata[1] = new Array(3).fill(0);
 
   MAdata = new Array(49);
   MAdata[0] = 0;
-  MAdata[1] = new Array(2).fill(0);
+  MAdata[1] = new Array(3).fill(0);
 
   MIdata = new Array(49);
   MIdata[0] = 0;
-  MIdata[1] = new Array(2).fill(0);
+  MIdata[1] = new Array(3).fill(0);
 
   MNdata = new Array(49);
   MNdata[0] = 0;
-  MNdata[1] = new Array(2).fill(0);
+  MNdata[1] = new Array(3).fill(0);
 
   MSdata = new Array(49);
   MSdata[0] = 0;
-  MSdata[1] = new Array(2).fill(0);
+  MSdata[1] = new Array(3).fill(0);
 
   MOdata = new Array(49);
   MOdata[0] = 0;
-  MOdata[1] = new Array(2).fill(0);
+  MOdata[1] = new Array(3).fill(0);
 
   MTdata = new Array(49);
   MTdata[0] = 0;
-  MTdata[1] = new Array(2).fill(0);
+  MTdata[1] = new Array(3).fill(0);
 
   NEdata = new Array(49);
   NEdata[0] = 0;
-  NEdata[1] = new Array(2).fill(0);
+  NEdata[1] = new Array(3).fill(0);
 
   NVdata = new Array(49);
   NVdata[0] = 0;
-  NVdata[1] = new Array(2).fill(0);
+  NVdata[1] = new Array(3).fill(0);
 
   NHdata = new Array(49);
   NHdata[0] = 0;
-  NHdata[1] = new Array(2).fill(0);
+  NHdata[1] = new Array(3).fill(0);
 
   NJdata = new Array(49);
   NJdata[0] = 0;
-  NJdata[1] = new Array(2).fill(0);
+  NJdata[1] = new Array(3).fill(0);
 
   NMdata = new Array(49);
   NMdata[0] = 0;
-  NMdata[1] = new Array(2).fill(0);
+  NMdata[1] = new Array(3).fill(0);
 
   NYdata = new Array(49);
   NYdata[0] = 0;
-  NYdata[1] = new Array(2).fill(0);
+  NYdata[1] = new Array(3).fill(0);
 
   NCdata = new Array(49);
   NCdata[0] = 0;
-  NCdata[1] = new Array(2).fill(0);
+  NCdata[1] = new Array(3).fill(0);
 
   NDdata = new Array(49);
   NDdata[0] = 0;
-  NDdata[1] = new Array(2).fill(0);
+  NDdata[1] = new Array(3).fill(0);
 
   OHdata = new Array(49);
   OHdata[0] = 0;
-  OHdata[1] = new Array(2).fill(0);
+  OHdata[1] = new Array(3).fill(0);
 
   OKdata = new Array(49);
   OKdata[0] = 0;
-  OKdata[1] = new Array(2).fill(0);
+  OKdata[1] = new Array(3).fill(0);
 
   ORdata = new Array(49);
   ORdata[0] = 0;
-  ORdata[1] = new Array(2).fill(0);
+  ORdata[1] = new Array(3).fill(0);
 
   PAdata = new Array(49);
   PAdata[0] = 0;
-  PAdata[1] = new Array(2).fill(0);
+  PAdata[1] = new Array(3).fill(0);
 
   RIdata = new Array(49);
   RIdata[0] = 0;
-  RIdata[1] = new Array(2).fill(0);
+  RIdata[1] = new Array(3).fill(0);
 
   SCdata = new Array(49);
   SCdata[0] = 0;
-  SCdata[1] = new Array(2).fill(0);
+  SCdata[1] = new Array(3).fill(0);
 
   SDdata = new Array(49);
   SDdata[0] = 0;
-  SDdata[1] = new Array(2).fill(0);
+  SDdata[1] = new Array(3).fill(0);
 
   TNdata = new Array(49);
   TNdata[0] = 0;
-  TNdata[1] = new Array(2).fill(0);
+  TNdata[1] = new Array(3).fill(0);
 
   TXdata = new Array(49);
   TXdata[0] = 0;
-  TXdata[1] = new Array(2).fill(0);
+  TXdata[1] = new Array(3).fill(0);
 
   UTdata = new Array(49);
   UTdata[0] = 0;
-  UTdata[1] = new Array(2).fill(0);
+  UTdata[1] = new Array(3).fill(0);
 
   VTdata = new Array(49);
   VTdata[0] = 0;
-  VTdata[1] = new Array(2).fill(0);
+  VTdata[1] = new Array(3).fill(0);
 
   VAdata = new Array(49);
   VAdata[0] = 0;
-  VAdata[1] = new Array(2).fill(0);
+  VAdata[1] = new Array(3).fill(0);
 
   WAdata = new Array(49);
   WAdata[0] = 0;
-  WAdata[1] = new Array(2).fill(0);
+  WAdata[1] = new Array(3).fill(0);
 
   WVdata = new Array(49);
   WVdata[0] = 0;
-  WVdata[1] = new Array(2).fill(0);
+  WVdata[1] = new Array(3).fill(0);
 
   WIdata = new Array(49);
   WIdata[0] = 0;
-  WIdata[1] = new Array(2).fill(0);
+  WIdata[1] = new Array(3).fill(0);
 
   WYdata = new Array(49);
   WYdata[0] = 0;
-  WYdata[1] = new Array(2).fill(0);
+  WYdata[1] = new Array(3).fill(0);
 
   //canada
   BCdata = new Array(49);
   BCdata[0] = 0;
-  BCdata[1] = new Array(2).fill(0);
+  BCdata[1] = new Array(3).fill(0);
 
   ABdata = new Array(49);
   ABdata[0] = 0;
-  ABdata[1] = new Array(2).fill(0);
+  ABdata[1] = new Array(3).fill(0);
 
   SKdata = new Array(49);
   SKdata[0] = 0;
-  SKdata[1] = new Array(2).fill(0);
+  SKdata[1] = new Array(3).fill(0);
 
   MBdata = new Array(49);
   MBdata[0] = 0;
-  MBdata[1] = new Array(2).fill(0);
+  MBdata[1] = new Array(3).fill(0);
 
   ONdata = new Array(49);
   ONdata[0] = 0;
-  ONdata[1] = new Array(2).fill(0);
+  ONdata[1] = new Array(3).fill(0);
 
   QCdata = new Array(49);
   QCdata[0] = 0;
-  QCdata[1] = new Array(2).fill(0);
+  QCdata[1] = new Array(3).fill(0);
 
   NBdata = new Array(49);
   NBdata[0] = 0;
-  NBdata[1] = new Array(2).fill(0);
+  NBdata[1] = new Array(3).fill(0);
 
   NSdata = new Array(49);
   NSdata[0] = 0;
-  NSdata[1] = new Array(2).fill(0);
+  NSdata[1] = new Array(3).fill(0);
 
   PEdata = new Array(49);
   PEdata[0] = 0;
-  PEdata[1] = new Array(2).fill(0);
+  PEdata[1] = new Array(3).fill(0);
 
   NFdata = new Array(49);
   NFdata[0] = 0;
-  NFdata[1] = new Array(2).fill(0);
+  NFdata[1] = new Array(3).fill(0);
 
   NTdata = new Array(49);
   NTdata[0] = 0;
-  NTdata[1] = new Array(2).fill(0);
+  NTdata[1] = new Array(3).fill(0);
 
   YTdata = new Array(49);
   YTdata[0] = 0;
-  YTdata[1] = new Array(2).fill(0);
+  YTdata[1] = new Array(3).fill(0);
 
   OTHERdata = new Array(49);
   OTHERdata[0] = 0;
-  OTHERdata[1] = new Array(2).fill(0);
+  OTHERdata[1] = new Array(3).fill(0);
 
 
 
