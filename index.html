@@ -27,16 +27,22 @@
 </head>
 
 <body>
+  <h1 style="text-align: center;">Feelings Candy Evokes by State</h1>
     <script src="https://d3js.org/d3.v4.min.js"></script>
-    <img src="Assets/Key-Horizontal.PNG" alt="color_key" class="key-img">
-    <p>Cutoffs: Joy (2.3 - 3.0], Meh(1.6 - 2.3], Despair[0 - 1.6]</p>
-    <div id="details" class="details">
-      <strong style="font-size: 24px; margin-bottom: 5px;">Details For </strong><span id="candy_name" style="font-size: 24px;"></span><br>
-      <strong style="margin-bottom: 5px;">State Name: </strong><span id="state_name" class="appended-text"></span><br>
-      <strong style="margin-bottom: 5px;">Average Rating: </strong><span id="average_rating" class="appended-text"></span><br>
-      <strong style="margin-bottom: 5px;">Total People Surveyed: </strong><span id="num_people" class="appended-text"></span><br>
-      <strong style="margin-bottom: 5px;">Percentage who Trick or Treated: </strong><span id="percent_out" class="appended-text"></span><br>
+    <div id="stuff">
+      <div id="stuff-inner">
+          <img src="Assets/Key-Final-Number-Line.PNG" alt="color_key" class="key-img" style="float: right; margin-right: 75px;">
+          <div id="details" class="details" style="float: left; margin-left: 75px;">
+            <strong style="font-size: 24px; margin-bottom: 5px;">Details For </strong><span id="candy_name" style="font-size: 24px;"></span><br>
+            <strong style="margin-bottom: 5px;">State Name: </strong><span id="state_name" class="appended-text"></span><br>
+            <strong style="margin-bottom: 5px;">Average Rating: </strong><span id="average_rating" class="appended-text"></span><br>
+            <strong style="margin-bottom: 5px;">Total People Surveyed: </strong><span id="num_people" class="appended-text"></span><br>
+            <strong style="margin-bottom: 5px;">Percentage who Trick or Treated: </strong><span id="percent_out" class="appended-text"></span><br>
+          </div>
+      </div>
+      <div id="stuff-map"></div>
     </div>
+    
 </body>
 
 <script src="https://d3js.org/topojson.v2.min.js"></script>
